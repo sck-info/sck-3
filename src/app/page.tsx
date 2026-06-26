@@ -4,6 +4,8 @@ import Hero from "@/components/Hero";
 import Metrics from "@/components/Metrics";
 import About from "@/components/About";
 import Sessions from "@/components/Sessions";
+import SomaticPathwayFinder from "@/components/SomaticPathwayFinder";
+import MindfulFocusTrainer from "@/components/MindfulFocusTrainer";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -25,6 +27,14 @@ export default function Home() {
         
         <ScrollReveal>
           <About />
+        </ScrollReveal>
+        
+        <ScrollReveal>
+          <SomaticPathwayFinder />
+        </ScrollReveal>
+        
+        <ScrollReveal>
+          <MindfulFocusTrainer />
         </ScrollReveal>
         
         <ScrollReveal>

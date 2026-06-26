@@ -55,26 +55,34 @@ export default function Sessions() {
 
   const activeSessions = sessions.filter((session) => {
     if (activeTab === "therapy") return session.category === "therapy";
-    if (activeTab === "consultation") return session.category === "consultation";
+    if (activeTab === "consultation")
+      return session.category === "consultation";
     return session.category === "class" || session.category === "workshop";
   });
 
   const activeTabConfig = tabsConfig.find((tab) => tab.id === activeTab)!;
 
   return (
-    <section id="sessions" className="border-t border-stone py-24 sm:py-32 bg-paper relative">
+    <section
+      id="sessions"
+      className="border-t border-stone py-24 sm:py-32 bg-paper relative"
+    >
       <HangingLotus align="left" />
       <HangingLotus align="right" />
       <Container>
         <div className="flex flex-col items-center text-center">
           <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-clay bg-stone/40 px-3.5 py-1.5 border border-stone">
-            Our Services
+            Our Offerings
           </span>
           <h2 className="mt-4 font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-            Choose Your <span className="font-serif italic font-normal text-clay">Pathway</span>
+            Choose Your{" "}
+            <span className="font-serif italic font-normal text-clay">
+              Pathway
+            </span>
           </h2>
           <p className="mt-4 max-w-prose text-xs sm:text-sm text-ink-soft leading-relaxed font-light">
-            Select a category below. Hover over any session card to reveal details and focus your wellness selection.
+            Select a category below. Hover over any session card to reveal
+            details and focus your wellness selection.
           </p>
         </div>
 
@@ -98,13 +106,15 @@ export default function Sessions() {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-                
-                <span className={`relative z-10 font-display text-lg font-medium transition-colors duration-300 ${
-                  isActive ? "text-paper" : "text-ink hover:text-clay"
-                }`}>
+
+                <span
+                  className={`relative z-10 font-display text-lg font-medium transition-colors duration-300 ${
+                    isActive ? "text-paper" : "text-ink hover:text-clay"
+                  }`}
+                >
                   {tab.label}
                 </span>
-                
+
                 <span
                   className={`relative z-10 text-[10px] font-mono mt-1 tracking-wider uppercase transition-colors duration-300 ${
                     isActive ? "text-paper/70" : "text-ink-soft"
@@ -126,7 +136,7 @@ export default function Sessions() {
         </div>
 
         <div className="mt-12">
-          <motion.div 
+          <motion.div
             layout
             className={`grid grid-cols-1 gap-8 transition-all duration-300 ${
               activeTab === "consultation"
@@ -167,7 +177,11 @@ export default function Sessions() {
               Payment &amp; Coordination
             </p>
             <p className="mt-2 text-xs leading-relaxed text-ink-soft font-light">
-              Pricing details are listed directly within the registration forms. Once you submit the form and complete your payment, our team will reach out within <span className="highlight-marker">48 to 72 hours</span> to schedule and confirm your booking.
+              Pricing details are listed directly within the registration forms.
+              Once you submit the form and complete your payment, our team will
+              reach out within{" "}
+              <span className="highlight-marker">48 to 72 hours</span> to
+              schedule and confirm your booking.
             </p>
           </div>
 
