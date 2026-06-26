@@ -9,7 +9,7 @@ export default function HangingLotus({
 }) {
   return (
     <div
-      className={`absolute top-0 pointer-events-none select-none z-20 ${
+      className={`hidden md:block absolute top-0 pointer-events-none select-none z-20 ${
         align === "left" ? "left-4 sm:left-12" : "right-4 sm:right-12"
       } ${className}`}
     >

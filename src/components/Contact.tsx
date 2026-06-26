@@ -17,7 +17,6 @@ export default function Contact() {
     <section id="contact" className="border-t border-stone py-20 sm:py-28 bg-paper relative overflow-hidden">
       {/* Hanging Lotus Corners */}
       <HangingLotus align="left" />
-      <HangingLotus align="right" />
       
       {/* Decorative Traditional Border Accents */}
       <div className="absolute left-[5%] bottom-0 h-10 w-[1px] bg-clay/35" />

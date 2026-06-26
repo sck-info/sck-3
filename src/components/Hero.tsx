@@ -5,32 +5,25 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
-import HangingLotus from "@/components/ui/HangingLotus";
 
 type BreathStateType = "Inhale" | "Hold" | "Exhale" | "HoldAgain";
 
 export default function Hero() {
-  // Pranayama Breath states (Box Breathing: Inhale -> Hold -> Exhale -> Hold Again)
-  const [breathState, setBreathState] = useState<BreathStateType>("Inhale");
-  const [breathCount, setBreathCount] = useState(4);
+  // Pranayama Box Breathing: Inhale (4s) -> Hold (4s) -> Exhale (4s) -> Hold (4s) = 16s cycle
+  const [cycleTime, setCycleTime] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setBreathCount((c) => {
-        if (c === 1) {
-          setBreathState((prev) => {
-            if (prev === "Inhale") return "Hold";
-            if (prev === "Hold") return "Exhale";
-            if (prev === "Exhale") return "HoldAgain";
-            return "Inhale";
-          });
-          return 4;
-        }
-        return c - 1;
-      });
+      setCycleTime((t) => (t + 1) % 16);
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const phaseIndex = Math.floor(cycleTime / 4);
+  const breathCount = 4 - (cycleTime % 4);
+  
+  const states: BreathStateType[] = ["Inhale", "Hold", "Exhale", "HoldAgain"];
+  const breathState = states[phaseIndex];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,9 +47,15 @@ export default function Hero() {
       id="top"
       className="relative pb-24 pt-16 sm:pt-24 sm:pb-32 overflow-hidden bg-aura"
     >
-      {/* Hanging Lotus Corners */}
-      <HangingLotus align="left" />
-      <HangingLotus align="right" />
+      {/* Large Lotus coming from the top-right corner inwards */}
+      <div className="absolute top-0 right-0 w-64 h-64 sm:w-80 sm:h-80 text-clay/10 select-none pointer-events-none transform translate-x-10 -translate-y-10">
+        <svg viewBox="0 0 100 100" fill="currentColor">
+          <path d="M100 0 C70 15 50 40 50 60 C50 75 65 90 80 90 C80 90 70 75 70 60 C70 40 90 15 100 0 Z" />
+          <path d="M100 20 C75 30 60 50 60 70 C60 82 72 90 85 90 C85 90 75 80 75 70 C75 50 90 30 100 20 Z" opacity="0.8" />
+          <path d="M100 40 C80 50 70 65 70 80 C70 88 80 90 90 90 C90 90 80 85 80 80 C80 65 90 50 100 40 Z" opacity="0.6" />
+          <path d="M100 60 C85 70 80 80 80 90 M100 80 C90 85 88 90 88 90" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
+        </svg>
+      </div>
 
       {/* Decorative Traditional Border Accent */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-stone/70" />
@@ -147,24 +146,13 @@ export default function Hero() {
 
             {/* INTERACTIVE COMPONENT: Pranayama Breath Centering (4-Phase Box Breathing) */}
             <div className="w-full max-w-xl border border-stone bg-paper p-5.5 rounded-none shadow-sm relative overflow-hidden">
-              <div className="absolute right-0 bottom-0 opacity-5 w-24 h-24 text-clay">
-                <svg viewBox="0 0 100 100" fill="currentColor">
-                  <circle cx="50" cy="50" r="40" />
-                </svg>
-              </div>
-
+              {/* No right end circle which is of no use */}
               <div className="flex items-center gap-5 relative z-10">
                 {/* Pulsing circular indicator */}
                 <div className="relative flex items-center justify-center shrink-0">
                   <motion.div
                     animate={{
-                      scale: breathState === "Inhale" 
-                        ? [1, 1.25] 
-                        : breathState === "Hold" 
-                        ? 1.25 
-                        : breathState === "Exhale" 
-                        ? [1.25, 1] 
-                        : 1,
+                      scale: (breathState === "Inhale" || breathState === "Hold") ? 1.22 : 1,
                     }}
                     transition={{
                       duration: 4,
