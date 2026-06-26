@@ -13,10 +13,32 @@ export default function Hero() {
   const [cycleTime, setCycleTime] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCycleTime((t) => (t + 1) % 16);
-    }, 1000);
-    return () => clearInterval(timer);
+    const hasSeen = typeof window !== "undefined" && sessionStorage.getItem("hasSeenIntro") === "true";
+    
+    let timerId: any = null;
+    const startTimer = () => {
+      if (timerId) return;
+      timerId = setInterval(() => {
+        setCycleTime((t) => (t + 1) % 16);
+      }, 1000);
+    };
+
+    if (hasSeen) {
+      startTimer();
+    } else {
+      const handleIntroComplete = () => {
+        startTimer();
+      };
+      window.addEventListener("intro-complete", handleIntroComplete);
+      return () => {
+        if (timerId) clearInterval(timerId);
+        window.removeEventListener("intro-complete", handleIntroComplete);
+      };
+    }
+
+    return () => {
+      if (timerId) clearInterval(timerId);
+    };
   }, []);
 
   const phaseIndex = Math.floor(cycleTime / 4);

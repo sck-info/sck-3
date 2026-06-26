@@ -12,6 +12,7 @@ export default function NamasteIntro() {
     if (hasSeen === "true") {
       setIsComplete(true);
       setShouldRender(false);
+      document.documentElement.classList.remove("intro-active");
     } else {
       setIsComplete(false);
       setShouldRender(true);
@@ -21,11 +22,14 @@ export default function NamasteIntro() {
         setIsComplete(true);
         sessionStorage.setItem("hasSeenIntro", "true");
         document.body.style.overflow = "";
+        document.documentElement.classList.remove("intro-active");
+        window.dispatchEvent(new Event("intro-complete"));
       }, 3200);
 
       return () => {
         clearTimeout(timer);
         document.body.style.overflow = "";
+        document.documentElement.classList.remove("intro-active");
       };
     }
   }, []);

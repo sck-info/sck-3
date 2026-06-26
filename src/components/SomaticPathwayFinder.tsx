@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
+import HangingLotus from "@/components/ui/HangingLotus";
 
 type StateKey = "mind" | "body" | "heart" | "soul" | "voice";
 
@@ -100,6 +101,9 @@ export default function SomaticPathwayFinder() {
 
   return (
     <section id="pathway-finder" className="border-t border-stone py-24 sm:py-32 bg-paper relative overflow-hidden">
+      <HangingLotus align="left" />
+      <HangingLotus align="right" />
+
       <div className="absolute top-[10%] left-[-8%] w-80 h-80 text-stone/10 select-none pointer-events-none transform -rotate-45">
         <svg viewBox="0 0 100 100" fill="currentColor">
           <path d="M50 0 C50 0 35 30 35 60 C35 80 50 100 50 100 C50 100 65 80 65 60 C65 30 50 0 50 0 Z" opacity="0.25" />
@@ -133,12 +137,10 @@ export default function SomaticPathwayFinder() {
           {somaticStates.map((state) => {
             const isSelected = state.key === selectedState;
             return (
-              <motion.button
+              <motion.div
                 key={state.key}
                 variants={itemVariants}
-                type="button"
-                onClick={() => setSelectedState(state.key)}
-                className={`p-6 border text-left cursor-pointer transition-all duration-300 relative rounded-none flex flex-col justify-between ${
+                className={`border transition-all duration-300 flex flex-col relative rounded-none ${
                   isSelected
                     ? "border-clay bg-stone-light/20 shadow-sm"
                     : "border-stone bg-paper hover:border-clay/40"
@@ -147,34 +149,87 @@ export default function SomaticPathwayFinder() {
                 {isSelected && (
                   <div className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-clay" />
                 )}
-                <div>
-                  <span className="text-2xl block mb-4" role="img" aria-label={state.label}>
-                    {state.icon}
-                  </span>
-                  <h3 className="font-display text-lg font-medium text-ink">
-                    {state.label}
-                  </h3>
-                  <p className="mt-2 text-[11px] leading-relaxed text-ink-soft font-light">
-                    {state.shortDesc}
-                  </p>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedState(state.key)}
+                  className="p-6 text-left cursor-pointer w-full flex-1 flex flex-col justify-between group"
+                >
+                  <div>
+                    <span className="text-2xl block mb-4" role="img" aria-label={state.label}>
+                      {state.icon}
+                    </span>
+                    <h3 className="font-display text-lg font-medium text-ink">
+                      {state.label}
+                    </h3>
+                    <p className="mt-2 text-[11px] leading-relaxed text-ink-soft font-light">
+                      {state.shortDesc}
+                    </p>
+                  </div>
 
-                <div className="mt-6 pt-4 border-t border-stone-light flex items-center justify-between">
-                  <span className="text-[9.5px] uppercase font-mono tracking-widest text-clay">
-                    Check In
-                  </span>
-                  <span className={`text-[10px] transition-transform duration-300 ${
-                    isSelected ? "translate-x-1 text-clay" : "text-ink-soft group-hover:translate-x-1"
-                  }`}>
-                    &rarr;
-                  </span>
-                </div>
-              </motion.button>
+                  <div className="mt-6 pt-4 border-t border-stone-light flex items-center justify-between w-full">
+                    <span className="text-[9.5px] uppercase font-mono tracking-widest text-clay">
+                      Check In
+                    </span>
+                    <span className={`text-[10px] transition-transform duration-300 ${
+                      isSelected ? "translate-x-1 text-clay" : "text-ink-soft group-hover:translate-x-1"
+                    }`}>
+                      &rarr;
+                    </span>
+                  </div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isSelected && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="block lg:hidden border-t border-stone bg-stone-light/10 p-6 overflow-hidden w-full"
+                    >
+                      <span className="text-[10px] uppercase font-mono tracking-widest text-clay font-bold block mb-2">
+                        Recommended Path &bull; {state.recommendedService}
+                      </span>
+                      <p className="text-xs leading-relaxed text-ink-soft font-light">
+                        {state.explanation}
+                      </p>
+
+                      <div className="mt-4 flex flex-col gap-2">
+                        {state.benefits.map((benefit) => (
+                          <div key={benefit} className="flex items-center gap-2">
+                            <span className="text-clay text-xs" aria-hidden="true">&#10047;</span>
+                            <span className="text-xs text-ink font-sans tracking-wide">
+                              {benefit}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-6 flex flex-col gap-3">
+                        <a
+                          href="#sessions"
+                          className="inline-flex items-center justify-center text-center bg-ink text-paper px-4 py-3 text-xs uppercase tracking-widest font-semibold transition-all duration-300 hover:bg-[#201715] border border-ink"
+                        >
+                          Explore Sessions
+                        </a>
+                        <a
+                          href={state.formUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center text-center bg-transparent text-ink px-4 py-3 text-xs uppercase tracking-widest font-semibold transition-all duration-300 hover:bg-stone-light border border-stone"
+                        >
+                          Register Now
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </motion.div>
 
-        <div className="mt-8 border border-stone bg-stone-light/15 p-8 sm:p-10 relative">
+        <div className="mt-8 border border-stone bg-stone-light/15 p-8 sm:p-10 relative hidden lg:block">
           <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay/30" />
           <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-clay/30" />
 

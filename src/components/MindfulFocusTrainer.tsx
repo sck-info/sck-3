@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
+import HangingLotus from "@/components/ui/HangingLotus";
 
 type TabType = "dharana" | "naada" | "jyotisha";
 
@@ -225,6 +226,8 @@ export default function MindfulFocusTrainer() {
 
   return (
     <section id="focus-trainer" className="border-t border-stone py-24 sm:py-32 bg-[#FAF8F5] relative overflow-hidden">
+      <HangingLotus align="left" />
+      <HangingLotus align="right" />
       <Container className="relative z-10">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-light/60 border border-stone rounded-none mb-4">

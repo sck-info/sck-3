@@ -50,6 +50,19 @@ export default function RootLayout({
       lang="en"
       className={`${displayFont.variable} ${bodyFont.variable} ${poppinsFont.variable} scroll-smooth`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem("hasSeenIntro") !== "true") {
+                  document.documentElement.classList.add("intro-active");
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-paper text-ink antialiased">
         <CaptureProtection />
         {children}
