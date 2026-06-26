@@ -5,7 +5,7 @@ import Container from "@/components/ui/Container";
 
 const testimonials = [
   {
-    name: "Sriram",
+    name: "Usha",
     role: "Software Architect",
     text: "The CranioSacral sessions with Sharath have been deeply restorative. I walked in with chronic stress and neck tension from desk work, and left feeling an incredible sense of space, lightness, and deep alignment. His gentle touch is truly therapeutic.",
     therapy: "CranioSacral Therapy",
@@ -23,7 +23,7 @@ const testimonials = [
     therapy: "Music Therapy",
   },
   {
-    name: "Usha",
+    name: "Harshit",
     role: "Entrepreneur",
     text: "The Vedic astrology reading was eye-opening. Sharath doesn't just read charts; he translates planetary patterns into practical life guidance. It gave me absolute clarity on my career path during a major transition phase.",
     therapy: "Vedic Astrology",
