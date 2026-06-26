@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+:root {
+  /* Premium Yoga & Indian Culture Theme Palette */
+  --color-paper: #FAF6F0;       /* Sandalwood background */
+  --color-ink: #1C1613;         /* Warm charcoal primary text */
+  --color-ink-soft: #5E504A;    /* Muted sandalwood grey-brown secondary text */
+  --color-clay: #D66238;        /* Sacred Saffron / Terracotta */
+  --color-moss: #2C5E43;        /* Himalayan Forest / Deep Green */
+  --color-moss-dark: #1E3F2D;   /* Darker Forest Green */
+  --color-stone: #EFE8DE;       /* Warm Stone divider / light background */
+  --color-stone-light: #F7F2EB; /* Very light Sandalwood for cards */
+  --color-gold: #C99738;        /* Golden Brass / Amber */
+  --color-border-active: #D66238;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-clay: var(--color-clay);
+  --color-moss: var(--color-moss);
+  --color-moss-dark: var(--color-moss-dark);
+  --color-stone: var(--color-stone);
+  --color-stone-light: var(--color-stone-light);
+  --color-gold: var(--color-gold);
+  --color-border-active: var(--color-border-active);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-poppins: var(--font-poppins);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Custom continuous scrolling marquee animations */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-scroll {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+/* Custom thin scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #EFE8DE;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D66238;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #EFE8DE transparent;
+}
+
+/* Highlight text style (bold popping text color) */
+.highlight-marker {
+  font-weight: 600;
+  color: var(--color-clay);
+}
