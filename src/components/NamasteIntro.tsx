@@ -12,7 +12,7 @@ export default function NamasteIntro() {
     const timer = setTimeout(() => {
       setIsComplete(true);
       document.body.style.overflow = "";
-    }, 3200); // 3.2 seconds total animation time
+    }, 3200);
 
     return () => {
       clearTimeout(timer);
@@ -68,17 +68,16 @@ export default function NamasteIntro() {
                 opacity: 1,
                 transition: { delay: 0.2, duration: 1, ease: "easeOut" }
               }}
-              className="mb-6"
+              className="mb-5"
             >
               <svg
-                width="80"
-                height="80"
+                width="75"
+                height="75"
                 viewBox="0 0 100 100"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="text-[#C99738]"
               >
-                {/* Traditional Sanskrit/Yoga Lotus line art representation */}
                 <path
                   d="M50 20 C50 20 40 45 40 60 C40 70 45 75 50 75 C55 75 60 70 60 60 C60 45 50 20 50 20 Z"
                   stroke="currentColor"
@@ -109,45 +108,45 @@ export default function NamasteIntro() {
                   strokeWidth="1.2"
                   strokeLinecap="round"
                 />
-                {/* Center Bindu/Spirit point */}
                 <circle cx="50" cy="12" r="2.5" fill="currentColor" />
               </svg>
             </motion.div>
 
-            {/* Namaste Text in Sanskrit */}
+            {/* Namaste Text in English (Main Highlight) */}
             <motion.h1
-              initial={{ letterSpacing: "0.2em", opacity: 0 }}
+              initial={{ letterSpacing: "0.15em", opacity: 0 }}
               animate={{ 
-                letterSpacing: "0.35em", 
+                letterSpacing: "0.25em", 
                 opacity: 1,
                 transition: { delay: 0.4, duration: 1.2, ease: "easeOut" }
               }}
-              className="font-serif italic text-4xl sm:text-5xl text-[#E8C374] font-light leading-none tracking-widest"
+              className="font-display italic text-4xl sm:text-6xl text-[#E8C374] font-medium leading-none tracking-widest uppercase"
             >
-              नमस्ते
+              Namaste
             </motion.h1>
 
+            {/* Subtle Devanagari translation subtext */}
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 5 }}
               animate={{ 
-                opacity: 0.8, 
+                opacity: 0.6, 
                 y: 0,
                 transition: { delay: 0.8, duration: 0.8 }
               }}
-              className="text-[9px] font-mono tracking-[0.5em] text-[#FAF6F0] uppercase mt-3"
+              className="text-sm tracking-[0.3em] text-[#FAF6F0] font-light mt-4"
             >
-              NAMASTE
+              नमस्ते
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ 
-                opacity: 0.6,
+                opacity: 0.5,
                 transition: { delay: 1.3, duration: 1.2 }
               }}
-              className="text-[10px] italic text-[#FAF6F0] mt-8 tracking-widest font-light"
+              className="text-[10px] italic text-[#FAF6F0] mt-8 tracking-widest font-mono font-light"
             >
-              Welcoming you to a space of healing & rest
+              A space for the body to remember how to rest
             </motion.p>
           </motion.div>
         </div>

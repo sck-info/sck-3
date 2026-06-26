@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Yoga & Indian Culture Theme Palette */
-  --color-paper: #FAF6F0;       /* Sandalwood background */
-  --color-ink: #1C1613;         /* Warm charcoal primary text */
-  --color-ink-soft: #5E504A;    /* Muted sandalwood grey-brown secondary text */
-  --color-clay: #D66238;        /* Sacred Saffron / Terracotta */
-  --color-moss: #2C5E43;        /* Himalayan Forest / Deep Green */
-  --color-moss-dark: #1E3F2D;   /* Darker Forest Green */
-  --color-stone: #EFE8DE;       /* Warm Stone divider / light background */
-  --color-stone-light: #F7F2EB; /* Very light Sandalwood for cards */
-  --color-gold: #C99738;        /* Golden Brass / Amber */
-  --color-border-active: #D66238;
+  /* serener and warmer culture palette */
+  --color-paper: #FCF8F5;       /* Warm cream background */
+  --color-ink: #201715;         /* Serene charcoal primary text */
+  --color-ink-soft: #63534E;    /* Sandalwood grey secondary text */
+  --color-clay: #D36037;        /* Sacred Saffron / Terracotta */
+  --color-moss: #3A6655;        /* Forest Emerald Green */
+  --color-moss-dark: #2B4F41;   /* Deeper Green */
+  --color-stone: #EFE4DC;       /* Warm Stone divider */
+  --color-stone-light: #F7EFE8; /* Soft Sandalwood card backings */
+  --color-gold: #D4A346;        /* Golden Brass */
+  --color-border-active: #D36037;
 }
 
 @theme inline {
@@ -56,24 +56,13 @@ body {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-clay);
   outline-offset: 2px;
 }
 
-/* Custom continuous scrolling marquee animations */
-@keyframes marquee {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-.animate-marquee-scroll {
-  display: flex;
-  width: max-content;
-  animation: marquee 35s linear infinite;
+/* Serene radial aura background simulating dawn/meditation energy */
+.bg-aura {
+  background: radial-gradient(circle at 50% 25%, #FFF0E6 0%, var(--color-paper) 60%);
 }
 
 /* Custom thin scrollbar */
@@ -87,22 +76,40 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #EFE8DE;
+  background: #EFE4DC;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D66238;
+  background: #D36037;
 }
 
 /* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #EFE8DE transparent;
+  scrollbar-color: #EFE4DC transparent;
 }
 
-/* Highlight text style (bold popping text color) */
+/* Highlight marker text styling */
 .highlight-marker {
   font-weight: 600;
   color: var(--color-clay);
+  border-bottom: 1px dashed var(--color-clay)/40;
+}
+
+/* Traditional border-drawn design helpers */
+.border-culture {
+  border: 1px solid var(--color-stone);
+  position: relative;
+}
+
+.border-culture::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px solid rgba(211, 96, 55, 0.15); /* light clay inner line */
+  pointer-events: none;
 }

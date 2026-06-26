@@ -1,9 +1,9 @@
 import NamasteIntro from "@/components/NamasteIntro";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Metrics from "@/components/Metrics";
 import About from "@/components/About";
 import Sessions from "@/components/Sessions";
-import Metrics from "@/components/Metrics";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -19,15 +19,15 @@ export default function Home() {
         <Hero />
         
         <ScrollReveal>
+          <Metrics />
+        </ScrollReveal>
+        
+        <ScrollReveal>
           <About />
         </ScrollReveal>
         
         <ScrollReveal>
           <Sessions />
-        </ScrollReveal>
-        
-        <ScrollReveal>
-          <Metrics />
         </ScrollReveal>
         
         <ScrollReveal>
