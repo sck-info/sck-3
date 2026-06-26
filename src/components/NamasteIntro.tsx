@@ -4,27 +4,38 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function NamasteIntro() {
-  const [isComplete, setIsComplete] = useState(false);
+  const [isComplete, setIsComplete] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    // Lock scroll during intro
-    document.body.style.overflow = "hidden";
-    const timer = setTimeout(() => {
+    const hasSeen = sessionStorage.getItem("hasSeenIntro");
+    if (hasSeen === "true") {
       setIsComplete(true);
-      document.body.style.overflow = "";
-    }, 3200);
+      setShouldRender(false);
+    } else {
+      setIsComplete(false);
+      setShouldRender(true);
+      
+      document.body.style.overflow = "hidden";
+      const timer = setTimeout(() => {
+        setIsComplete(true);
+        sessionStorage.setItem("hasSeenIntro", "true");
+        document.body.style.overflow = "";
+      }, 3200);
 
-    return () => {
-      clearTimeout(timer);
-      document.body.style.overflow = "";
-    };
+      return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = "";
+      };
+    }
   }, []);
+
+  if (!shouldRender) return null;
 
   return (
     <AnimatePresence>
       {!isComplete && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden pointer-events-none">
-          {/* Top Panel - Slides Up */}
           <motion.div
             initial={{ y: 0 }}
             exit={{ 
@@ -34,7 +45,6 @@ export default function NamasteIntro() {
             className="absolute top-0 left-0 w-full h-[50.5vh] bg-[#8A2512] border-b border-[#C99738]/20 pointer-events-auto"
           />
 
-          {/* Bottom Panel - Slides Down */}
           <motion.div
             initial={{ y: 0 }}
             exit={{ 
@@ -44,7 +54,6 @@ export default function NamasteIntro() {
             className="absolute bottom-0 left-0 w-full h-[50.5vh] bg-[#8A2512] border-t border-[#C99738]/20 pointer-events-auto"
           />
 
-          {/* Center Content Elements */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ 
@@ -60,7 +69,6 @@ export default function NamasteIntro() {
             }}
             className="relative z-[10000] flex flex-col items-center text-center px-4"
           >
-            {/* Elegant Lotus SVG */}
             <motion.div
               initial={{ rotate: -8, opacity: 0 }}
               animate={{ 
@@ -112,7 +120,6 @@ export default function NamasteIntro() {
               </svg>
             </motion.div>
 
-            {/* Namaste Text in English (Main Highlight) */}
             <motion.h1
               initial={{ letterSpacing: "0.15em", opacity: 0 }}
               animate={{ 
@@ -125,7 +132,6 @@ export default function NamasteIntro() {
               Namaste
             </motion.h1>
 
-            {/* Subtle Devanagari translation subtext */}
             <motion.p
               initial={{ opacity: 0, y: 5 }}
               animate={{ 

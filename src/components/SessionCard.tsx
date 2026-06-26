@@ -35,7 +35,6 @@ export default function SessionCard({
           : "border-stone bg-stone-light/10"
       }`}
     >
-      {/* Decorative corner accent only visible on hover */}
       {isHovered && (
         <>
           <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay" />
@@ -46,7 +45,6 @@ export default function SessionCard({
       )}
 
       <div>
-        {/* Top Badges */}
         <div className="flex flex-wrap gap-1.5">
           {session.duration && (
             <span className="text-[9px] uppercase tracking-wider font-bold bg-stone text-ink px-2.5 py-0.5 rounded-full">
@@ -65,24 +63,20 @@ export default function SessionCard({
           )}
         </div>
 
-        {/* Title */}
         <h3 className="mt-4 font-display text-xl font-medium tracking-tight text-ink transition-colors duration-300 group-hover:text-clay">
           {session.name}
         </h3>
 
-        {/* SubDetails */}
         {session.subDetails && (
           <p className="mt-1 text-[11px] font-mono tracking-tight text-clay/80 uppercase font-semibold">
             {session.subDetails}
           </p>
         )}
 
-        {/* Description */}
         <p className="mt-3 text-xs leading-relaxed text-ink-soft font-light">
           {session.description}
         </p>
 
-        {/* Read More Accordion */}
         {session.additionalInfo && (
           <div className="mt-4">
             <button
@@ -110,7 +104,7 @@ export default function SessionCard({
               }`}
             >
               <div className="min-h-0">
-                <p className="border-l border-clay pl-3 text-xs leading-relaxed text-ink-soft font-light italic">
+                <p className="border-l-2 border-clay pl-3 text-xs leading-relaxed text-ink-soft font-light italic">
                   {session.additionalInfo}
                 </p>
               </div>

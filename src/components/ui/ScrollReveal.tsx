@@ -17,7 +17,7 @@ export default function ScrollReveal({ children, delay = 0 }: ScrollRevealProps)
       transition={{
         duration: 0.8,
         delay: delay,
-        ease: [0.16, 1, 0.3, 1], // Custom premium easeOutExpo curve
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       }}
     >
       {children}

@@ -15,10 +15,8 @@ const contactItems = [
 export default function Contact() {
   return (
     <section id="contact" className="border-t border-stone py-20 sm:py-28 bg-paper relative overflow-hidden">
-      {/* Hanging Lotus Corners */}
       <HangingLotus align="left" />
       
-      {/* Decorative Traditional Border Accents */}
       <div className="absolute left-[5%] bottom-0 h-10 w-[1px] bg-clay/35" />
       <div className="absolute right-[5%] bottom-0 h-10 w-[1px] bg-clay/35" />
 
@@ -38,7 +36,6 @@ export default function Contact() {
           </div>
 
           <div className="lg:col-span-6 border border-clay/50 p-8 bg-stone-light/30 flex flex-col gap-6 relative">
-            {/* Elegant corner details */}
             <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay" />
             <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-clay" />
             

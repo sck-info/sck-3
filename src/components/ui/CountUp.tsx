@@ -20,7 +20,6 @@ export default function CountUp({
           setHasAnimated(true);
           const start = 0;
           const end = value;
-          // Determine duration based on size of value
           const duration = end <= 2 ? 600 : end <= 20 ? 800 : 1500;
           const startTime = performance.now();
 
@@ -29,7 +28,6 @@ export default function CountUp({
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Ease out quad
             const easeProgress = progress * (2 - progress);
             const current = start + (end - start) * easeProgress;
             

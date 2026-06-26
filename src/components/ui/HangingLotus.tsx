@@ -21,7 +21,6 @@ export default function HangingLotus({
         xmlns="http://www.w3.org/2000/svg"
         className="text-clay/20"
       >
-        {/* Hanging Thread */}
         <line
           x1="30"
           y1="0"
@@ -31,20 +30,16 @@ export default function HangingLotus({
           strokeWidth="1"
           strokeDasharray="3 3"
         />
-        {/* Decorative Gold/Clay Beads */}
         <circle cx="30" cy="40" r="3" fill="#D4A346" opacity="0.65" />
         <circle cx="30" cy="80" r="3" fill="#D4A346" opacity="0.65" />
         <circle cx="30" cy="115" r="4.5" fill="#D36037" opacity="0.8" />
         
-        {/* Lotus Blossom Dangling Ornament */}
         <g transform="translate(30, 140) scale(0.7)">
-          {/* Central Petal */}
           <path
             d="M0 -25 C -8 -10 -12 10 0 25 C 12 10 8 -10 0 -25 Z"
             fill="currentColor"
             opacity="0.8"
           />
-          {/* Left Petals */}
           <path
             d="M0 -15 C -20 -5 -25 15 -10 25 C -2 20 0 10 0 -15 Z"
             fill="currentColor"
@@ -55,7 +50,6 @@ export default function HangingLotus({
             fill="currentColor"
             opacity="0.45"
           />
-          {/* Right Petals */}
           <path
             d="M0 -15 C 20 -5 25 15 10 25 C 2 20 0 10 0 -15 Z"
             fill="currentColor"
@@ -66,7 +60,6 @@ export default function HangingLotus({
             fill="currentColor"
             opacity="0.45"
           />
-          {/* Base bead connector */}
           <circle cx="0" cy="22" r="3" fill="#D4A346" />
         </g>
       </svg>

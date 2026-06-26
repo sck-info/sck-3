@@ -50,7 +50,6 @@ export default function Header() {
         </button>
       </Container>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <nav
           className="border-t border-stone bg-paper/95 backdrop-blur-md sm:hidden animate-in fade-in slide-in-from-top-4 duration-200"

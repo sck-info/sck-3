@@ -114,7 +114,7 @@ export const sessions: Session[] = [
   },
   {
     id: "nlp",
-    name: "Neuro-Linguistic Programming (NLP)", // Wait, NLP was NLP in sessions.ts! Let's check NLP name. It should be Neuro-Linguistic Programming (NLP)
+    name: "Neuro-Linguistic Programming (NLP)",
     description:
       "A structured approach for enhancing communication, adjusting subconscious habits, and accelerating personal growth by aligning thoughts, language, and behavior.",
     formUrl: "https://forms.gle/REPLACE_WITH_CST_FORM",

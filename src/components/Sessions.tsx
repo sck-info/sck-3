@@ -53,7 +53,6 @@ export default function Sessions() {
   const [activeTab, setActiveTab] = useState<CategoryType>("therapy");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // Filter sessions corresponding to active tab
   const activeSessions = sessions.filter((session) => {
     if (activeTab === "therapy") return session.category === "therapy";
     if (activeTab === "consultation") return session.category === "consultation";
@@ -64,11 +63,9 @@ export default function Sessions() {
 
   return (
     <section id="sessions" className="border-t border-stone py-24 sm:py-32 bg-paper relative">
-      {/* Hanging Lotus Corners */}
       <HangingLotus align="left" />
       <HangingLotus align="right" />
       <Container>
-        {/* Section Intro */}
         <div className="flex flex-col items-center text-center">
           <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-clay bg-stone/40 px-3.5 py-1.5 border border-stone">
             Our Services
@@ -76,12 +73,11 @@ export default function Sessions() {
           <h2 className="mt-4 font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl">
             Choose Your <span className="font-serif italic font-normal text-clay">Pathway</span>
           </h2>
-          <p className="mt-4 max-w-prose text-xs sm:text-sm text-ink-soft leading-relaxed">
+          <p className="mt-4 max-w-prose text-xs sm:text-sm text-ink-soft leading-relaxed font-light">
             Select a category below. Hover over any session card to reveal details and focus your wellness selection.
           </p>
         </div>
 
-        {/* Dynamic Navigation Tabs */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 border border-stone">
           {tabsConfig.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -91,11 +87,10 @@ export default function Sessions() {
                 type="button"
                 onClick={() => {
                   setActiveTab(tab.id);
-                  setHoveredId(null); // reset hover state
+                  setHoveredId(null);
                 }}
                 className="relative flex flex-col items-center text-center py-6 px-4 cursor-pointer transition-all duration-300 overflow-hidden outline-none"
               >
-                {/* Background sliding highlight using Framer Motion */}
                 {isActive && (
                   <motion.div
                     layoutId="activeTabBackground"
@@ -122,7 +117,6 @@ export default function Sessions() {
           })}
         </div>
 
-        {/* Tab Explanation Details */}
         <div className="mt-8 border-x border-b border-stone p-8 sm:p-10 bg-stone-light/15 relative">
           <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay/30" />
           <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-clay/30" />
@@ -131,7 +125,6 @@ export default function Sessions() {
           </p>
         </div>
 
-        {/* Sessions Cards Grid with Layout Animations */}
         <div className="mt-12">
           <motion.div 
             layout
@@ -165,7 +158,6 @@ export default function Sessions() {
           </motion.div>
         </div>
 
-        {/* Pricing / Booking Notice & Unified Call to Action */}
         <div className="mt-16 border-t border-stone pt-12 flex flex-col items-center gap-6">
           <div className="border border-clay/60 p-6 bg-stone-light/35 text-center max-w-2xl mx-auto relative">
             <span className="absolute top-0 left-0 bg-clay text-paper text-[8px] uppercase tracking-widest font-bold px-2.5 py-0.5">

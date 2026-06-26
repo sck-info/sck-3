@@ -7,7 +7,6 @@ export default function Footer() {
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-stone/50">
           
-          {/* Brand/Vision Column */}
           <div className="md:col-span-5 flex flex-col items-start gap-4">
             <a href="#top" className="font-display text-lg font-medium tracking-tight">
               Sharath Chandra <span className="font-serif italic font-normal">Kancherla</span>
@@ -28,7 +27,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation Column */}
           <div className="md:col-span-3 flex flex-col gap-4">
             <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-ink">
               Navigation
@@ -49,7 +47,6 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Contact & Socials Column */}
           <div className="md:col-span-4 flex flex-col gap-4">
             <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-ink">
               Connect
@@ -104,7 +101,6 @@ export default function Footer() {
           
         </div>
 
-        {/* Bottom Row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-[10px] font-mono tracking-wider text-ink/70 uppercase">
           <span>&copy; {new Date().getFullYear()} Sharath Chandra Kancherla</span>
           <span>Nurturing a world that lives as one global family</span>

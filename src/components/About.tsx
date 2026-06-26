@@ -31,19 +31,15 @@ export default function About() {
       id="about"
       className="border-t border-stone py-24 sm:py-32 bg-paper relative overflow-hidden"
     >
-      {/* Hanging Lotus Corners */}
       <HangingLotus align="left" />
       <HangingLotus align="right" />
 
-      {/* Decorative vertical guide lines */}
       <div className="absolute left-[5%] top-0 h-full w-[1px] bg-stone/20 hidden xl:block" />
       <div className="absolute right-[5%] top-0 h-full w-[1px] bg-stone/20 hidden xl:block" />
 
       <Container>
-        {/* Redesigned 3-Column Column Grid Template */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start relative z-10">
           
-          {/* COLUMN 1 (lg:col-span-4): Editorial Quote & Story */}
           <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-28">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-clay" />
@@ -73,14 +69,12 @@ export default function About() {
             </div>
           </div>
 
-          {/* COLUMN 2 (lg:col-span-4): Restored Original Vision and Mission Frame */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <h3 className="text-xs font-mono tracking-[0.2em] font-bold text-moss flex items-center gap-2 uppercase">
               <span className="text-clay text-[10px]">&#10047;</span>
               Path of Service
             </h3>
 
-            {/* Vision and Mission Frame (Restored exactly from old layout) */}
             <div className="border border-ink p-8 bg-paper relative shadow-sm">
               <div className="absolute top-0 right-0 bg-ink text-paper text-[8px] uppercase tracking-widest font-bold px-3 py-1">
                 Foundations
@@ -111,7 +105,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* COLUMN 3 (lg:col-span-4): Timeline "Path of Wisdom" Credentials */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <h3 className="text-xs font-mono tracking-[0.2em] font-bold text-moss flex items-center gap-2 uppercase">
               <Award className="h-3.5 w-3.5 text-clay" />
@@ -138,7 +131,6 @@ export default function About() {
 
         </div>
 
-        {/* Unified Bottom Row: Inspiration Panel */}
         <div className="mt-20 border-t border-stone pt-12 flex flex-col items-center">
           <div className="border border-stone/50 bg-stone-light/10 p-8 text-center max-w-2xl mx-auto rounded-none relative">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-paper px-4 text-clay">
