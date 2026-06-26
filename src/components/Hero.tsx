@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
+import HangingLotus from "@/components/ui/HangingLotus";
+
+type BreathStateType = "Inhale" | "Hold" | "Exhale" | "HoldAgain";
 
 export default function Hero() {
-  // Pranayama Breath states
-  const [breathState, setBreathState] = useState<"Inhale" | "Hold" | "Exhale">("Inhale");
+  // Pranayama Breath states (Box Breathing: Inhale -> Hold -> Exhale -> Hold Again)
+  const [breathState, setBreathState] = useState<BreathStateType>("Inhale");
   const [breathCount, setBreathCount] = useState(4);
 
   useEffect(() => {
@@ -18,6 +21,7 @@ export default function Hero() {
           setBreathState((prev) => {
             if (prev === "Inhale") return "Hold";
             if (prev === "Hold") return "Exhale";
+            if (prev === "Exhale") return "HoldAgain";
             return "Inhale";
           });
           return 4;
@@ -50,6 +54,10 @@ export default function Hero() {
       id="top"
       className="relative pb-24 pt-16 sm:pt-24 sm:pb-32 overflow-hidden bg-aura"
     >
+      {/* Hanging Lotus Corners */}
+      <HangingLotus align="left" />
+      <HangingLotus align="right" />
+
       {/* Decorative Traditional Border Accent */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-stone/70" />
       
@@ -69,7 +77,7 @@ export default function Hero() {
           animate="visible"
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 items-center"
         >
-          {/* LEFT COLUMN: Large Framed Portrait (Now completely reversed and redesigned) */}
+          {/* LEFT COLUMN: Large Framed Portrait */}
           <motion.div
             variants={itemVariants}
             className="lg:col-span-5 flex flex-col justify-center items-center w-full order-last lg:order-first"
@@ -80,7 +88,7 @@ export default function Hero() {
               
               <div className="relative w-full h-full overflow-hidden border border-stone">
                 <Image
-                  src="/images/profile-hero.jpg" // Swapped hero images for a different presentation
+                  src="/images/profile-hero.jpg"
                   alt="Sharath Chandra Kancherla"
                   fill
                   priority
@@ -107,10 +115,10 @@ export default function Hero() {
             variants={itemVariants}
             className="lg:col-span-7 flex flex-col items-start gap-8"
           >
-            {/* Spiritual Greeting Header */}
+            {/* Spiritual Greeting Header (No sparkles) */}
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-light/60 border border-stone rounded-none mb-4">
-                <Sparkles className="h-3 w-3 text-gold" />
+                <span className="text-clay text-[10px]" aria-hidden="true">&#10047;</span>
                 <span className="text-[9px] font-mono tracking-[0.25em] font-bold text-moss">
                   WELCOME &bull; SWAAGATAM
                 </span>
@@ -137,9 +145,8 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* INTERACTIVE COMPONENT: Pranayama Breath Centering (Wow Feature) */}
+            {/* INTERACTIVE COMPONENT: Pranayama Breath Centering (4-Phase Box Breathing) */}
             <div className="w-full max-w-xl border border-stone bg-paper p-5.5 rounded-none shadow-sm relative overflow-hidden">
-              {/* Subtle background waves */}
               <div className="absolute right-0 bottom-0 opacity-5 w-24 h-24 text-clay">
                 <svg viewBox="0 0 100 100" fill="currentColor">
                   <circle cx="50" cy="50" r="40" />
@@ -151,7 +158,13 @@ export default function Hero() {
                 <div className="relative flex items-center justify-center shrink-0">
                   <motion.div
                     animate={{
-                      scale: breathState === "Inhale" ? [1, 1.25] : breathState === "Hold" ? 1.25 : [1.25, 1],
+                      scale: breathState === "Inhale" 
+                        ? [1, 1.25] 
+                        : breathState === "Hold" 
+                        ? 1.25 
+                        : breathState === "Exhale" 
+                        ? [1.25, 1] 
+                        : 1,
                     }}
                     transition={{
                       duration: 4,
@@ -162,7 +175,9 @@ export default function Hero() {
                         ? "bg-clay/10 border-clay"
                         : breathState === "Hold"
                         ? "bg-gold/10 border-gold"
-                        : "bg-moss/10 border-moss"
+                        : breathState === "Exhale"
+                        ? "bg-moss/10 border-moss"
+                        : "bg-stone-light border-stone"
                     }`}
                   >
                     <span className="text-xs font-mono font-bold text-ink">{breathCount}s</span>
@@ -170,7 +185,13 @@ export default function Hero() {
                   
                   {/* Outer radiating aura */}
                   <span className={`absolute inset-0 rounded-full animate-ping opacity-25 ${
-                    breathState === "Inhale" ? "bg-clay" : breathState === "Hold" ? "bg-gold" : "bg-moss"
+                    breathState === "Inhale" 
+                      ? "bg-clay" 
+                      : breathState === "Hold" 
+                      ? "bg-gold" 
+                      : breathState === "Exhale" 
+                      ? "bg-moss" 
+                      : "bg-stone"
                   }`} />
                 </div>
 
@@ -187,9 +208,10 @@ export default function Hero() {
                       transition={{ duration: 0.2 }}
                       className="text-sm font-serif italic text-ink font-semibold mt-1"
                     >
-                      {breathState === "Inhale" && "Slowly breathe in deep energy..."}
-                      {breathState === "Hold" && "Retain the stillness inside..."}
-                      {breathState === "Exhale" && "Release all tension and stress..."}
+                      {breathState === "Inhale" && "Breath In: Draw in quiet energy..."}
+                      {breathState === "Hold" && "Hold: Suspend and feel the peace..."}
+                      {breathState === "Exhale" && "Breath Out: Let go of all strain..."}
+                      {breathState === "HoldAgain" && "Hold Again: Rest in the empty space..."}
                     </motion.p>
                   </AnimatePresence>
                   <p className="text-[10.5px] leading-normal text-ink-soft/90 font-light mt-1">

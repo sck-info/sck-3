@@ -1,5 +1,6 @@
 import Container from "@/components/ui/Container";
-import { Sparkles, Calendar, Award } from "lucide-react";
+import HangingLotus from "@/components/ui/HangingLotus";
+import { Award } from "lucide-react";
 
 const pathSteps = [
   {
@@ -30,17 +31,17 @@ export default function About() {
       id="about"
       className="border-t border-stone py-24 sm:py-32 bg-paper relative overflow-hidden"
     >
-      {/* Decorative Traditional Border Accent */}
-      <div className="absolute top-[10%] right-[3%] w-64 h-64 text-stone/10 select-none pointer-events-none">
-        <svg viewBox="0 0 100 100" fill="currentColor">
-          <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="0.5" fill="none" strokeDasharray="4 4" />
-          <circle cx="50" cy="50" r="30" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        </svg>
-      </div>
+      {/* Hanging Lotus Corners */}
+      <HangingLotus align="left" />
+      <HangingLotus align="right" />
+
+      {/* Decorative vertical guide lines */}
+      <div className="absolute left-[5%] top-0 h-full w-[1px] bg-stone/20 hidden xl:block" />
+      <div className="absolute right-[5%] top-0 h-full w-[1px] bg-stone/20 hidden xl:block" />
 
       <Container>
-        {/* Completely Redesigned 3-Column Column Grid Template */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+        {/* Redesigned 3-Column Column Grid Template */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start relative z-10">
           
           {/* COLUMN 1 (lg:col-span-4): Editorial Quote & Story */}
           <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-28">
@@ -63,7 +64,7 @@ export default function About() {
             <div className="border border-stone p-5 bg-stone-light/10 text-[11px] leading-relaxed text-ink-soft italic relative">
               <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-clay" />
               <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-clay" />
-              <p className="font-serif">
+              <p className="font-serif text-ink">
                 &ldquo;श्रद्धावान् लभते ज्ञानं तत्परः संयतेन्द्रियः&rdquo;
               </p>
               <p className="text-[9px] font-sans tracking-wide text-ink-soft/80 mt-1 not-italic uppercase font-semibold">
@@ -72,51 +73,54 @@ export default function About() {
             </div>
           </div>
 
-          {/* COLUMN 2 (lg:col-span-4): Stacked Path of Service (Vision/Mission) */}
-          <div className="lg:col-span-4 flex flex-col gap-8">
+          {/* COLUMN 2 (lg:col-span-4): Restored Original Vision and Mission Frame */}
+          <div className="lg:col-span-4 flex flex-col gap-6">
             <h3 className="text-xs font-mono tracking-[0.2em] font-bold text-moss flex items-center gap-2 uppercase">
-              <Sparkles className="h-3.5 w-3.5 text-gold" />
+              <span className="text-clay text-[10px]">&#10047;</span>
               Path of Service
             </h3>
 
-            {/* Vision Panel */}
-            <div className="border-culture bg-stone-light/25 p-6 flex flex-col gap-3 relative">
-              <span className="absolute top-0 right-0 bg-clay text-paper text-[8px] uppercase tracking-widest font-bold px-2 py-0.5">
-                Vision
-              </span>
-              <h4 className="text-xs uppercase tracking-wider font-bold text-ink">
-                Inspire 1 Billion Seekers
-              </h4>
-              <p className="text-xs leading-relaxed text-ink-soft font-light">
-                To uplift lives globally through meditation, acoustics, wisdom, and conscious lifestyle coaching, establishing a peaceful world that lives as one global family.
-              </p>
-            </div>
+            {/* Vision and Mission Frame (Restored exactly from old layout) */}
+            <div className="border border-ink p-8 bg-paper relative shadow-sm">
+              <div className="absolute top-0 right-0 bg-ink text-paper text-[8px] uppercase tracking-widest font-bold px-3 py-1">
+                Foundations
+              </div>
 
-            {/* Mission Panel */}
-            <div className="border-culture bg-stone-light/25 p-6 flex flex-col gap-3 relative">
-              <span className="absolute top-0 right-0 bg-clay text-paper text-[8px] uppercase tracking-widest font-bold px-2 py-0.5">
-                Mission
-              </span>
-              <h4 className="text-xs uppercase tracking-wider font-bold text-ink">
-                Empower and Restore
-              </h4>
-              <p className="text-xs leading-relaxed text-ink-soft font-light">
-                Provide actionable methodologies for well-being through classes, corporate modules, and hands-on biodynamic therapy sessions that release stress and restore vitality.
-              </p>
+              <div className="mb-8">
+                <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-ink mb-3">
+                  Our Vision
+                </h3>
+                <p className="text-xs leading-relaxed text-ink-soft font-light">
+                  To inspire and uplift one billion lives through healing,
+                  wisdom, music, and conscious living—nurturing a world that
+                  lives as one global family.
+                </p>
+              </div>
+
+              <div className="border-t border-stone pt-8">
+                <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-ink mb-3">
+                  Our Mission
+                </h3>
+                <p className="text-xs leading-relaxed text-ink-soft font-light">
+                  To empower individuals with practical tools for holistic
+                  well-being through meditation, yoga, breathwork, music,
+                  education, and timeless wisdom, enabling them to live
+                  healthier, happier, and more purposeful lives.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* COLUMN 3 (lg:col-span-4): Timeline "Path of Wisdom" Credentials */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <h3 className="text-xs font-mono tracking-[0.2em] font-bold text-moss flex items-center gap-2 uppercase">
-              <Award className="h-3.5 w-3.5 text-gold" />
+              <Award className="h-3.5 w-3.5 text-clay" />
               Path of Wisdom
             </h3>
 
             <div className="relative border-l border-stone pl-6 ml-2 flex flex-col gap-8 py-2">
               {pathSteps.map((step, idx) => (
                 <div key={idx} className="relative">
-                  {/* Timeline indicator node */}
                   <span className="absolute -left-[30px] top-1 flex items-center justify-center w-4 h-4 bg-paper border border-clay rounded-full">
                     <span className="w-1.5 h-1.5 bg-clay rounded-full" />
                   </span>
@@ -137,7 +141,6 @@ export default function About() {
         {/* Unified Bottom Row: Inspiration Panel */}
         <div className="mt-20 border-t border-stone pt-12 flex flex-col items-center">
           <div className="border border-stone/50 bg-stone-light/10 p-8 text-center max-w-2xl mx-auto rounded-none relative">
-            {/* Top decorative mandala details */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-paper px-4 text-clay">
               <span className="text-sm select-none">&#10047;</span>
             </div>

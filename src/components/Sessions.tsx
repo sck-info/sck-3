@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SessionCard from "@/components/SessionCard";
 import { sessions } from "@/data/sessions";
+import HangingLotus from "@/components/ui/HangingLotus";
 
 type CategoryType = "therapy" | "consultation" | "classes_workshops";
 
@@ -62,7 +63,10 @@ export default function Sessions() {
   const activeTabConfig = tabsConfig.find((tab) => tab.id === activeTab)!;
 
   return (
-    <section id="sessions" className="border-t border-stone py-24 sm:py-32 bg-paper">
+    <section id="sessions" className="border-t border-stone py-24 sm:py-32 bg-paper relative">
+      {/* Hanging Lotus Corners */}
+      <HangingLotus align="left" />
+      <HangingLotus align="right" />
       <Container>
         {/* Section Intro */}
         <div className="flex flex-col items-center text-center">
