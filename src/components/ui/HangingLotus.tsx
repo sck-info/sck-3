@@ -11,7 +11,7 @@ export default function HangingLotus({
 }) {
   return (
     <div
-      className={`hidden md:block absolute top-0 pointer-events-none select-none z-20 ${
+      className={`block absolute top-0 pointer-events-none select-none z-20 ${
         offset ? offset : (align === "left" ? "left-4 sm:left-12" : "right-4 sm:right-12")
       } ${className}`}
     >
@@ -21,7 +21,7 @@ export default function HangingLotus({
         viewBox="0 0 60 180"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="text-clay/20"
+        className="text-clay/20 w-8 h-28 md:w-12 md:h-44"
       >
         <line
           x1="30"
