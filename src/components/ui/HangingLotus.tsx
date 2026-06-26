@@ -3,14 +3,16 @@ import React from "react";
 export default function HangingLotus({
   className = "",
   align = "left",
+  offset = "",
 }: {
   className?: string;
   align?: "left" | "right";
+  offset?: string;
 }) {
   return (
     <div
       className={`hidden md:block absolute top-0 pointer-events-none select-none z-20 ${
-        align === "left" ? "left-4 sm:left-12" : "right-4 sm:right-12"
+        offset ? offset : (align === "left" ? "left-4 sm:left-12" : "right-4 sm:right-12")
       } ${className}`}
     >
       <svg

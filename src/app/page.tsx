@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Metrics from "@/components/Metrics";
 import About from "@/components/About";
 import Sessions from "@/components/Sessions";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -28,6 +29,10 @@ export default function Home() {
         
         <ScrollReveal>
           <Sessions />
+        </ScrollReveal>
+        
+        <ScrollReveal>
+          <Testimonials />
         </ScrollReveal>
         
         <ScrollReveal>

@@ -47,8 +47,8 @@ export default function Hero() {
       id="top"
       className="relative pb-24 pt-16 sm:pt-24 sm:pb-32 overflow-hidden bg-aura"
     >
-      <HangingLotus align="left" />
       <HangingLotus align="right" />
+      <HangingLotus align="right" offset="right-16 sm:right-28" className="top-8 opacity-75 scale-90" />
 
       <div className="absolute top-0 left-0 w-full h-[1px] bg-stone/70" />
       
@@ -76,7 +76,7 @@ export default function Hero() {
               
               <div className="relative w-full h-full overflow-hidden border border-stone">
                 <Image
-                  src="/images/profile-hero.jpg"
+                  src="/images/profile-hero1.jpeg"
                   alt="Sharath Chandra Kancherla"
                   fill
                   priority
