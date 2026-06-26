@@ -10,7 +10,7 @@ import HangingLotus from "@/components/ui/HangingLotus";
 type BreathStateType = "Inhale" | "Hold" | "Exhale" | "HoldAgain";
 
 const slideshowImages = [
-  { src: "/images/profile-hero1.jpeg", tag: "PRANIC INSTRUCTOR", alt: "Sharath Chandra Kancherla - CST touch" },
+  { src: "/images/profile-hero1.jpeg", tag: "LIFE SKILLS FACILITATOR", alt: "Sharath Chandra Kancherla - CST touch" },
   { src: "/images/sck-music.jpeg", tag: "MUSIC THERAPIST", alt: "Sharath Chandra Kancherla - Swara Frequencies" },
   { src: "/images/sck-yoga.jpeg", tag: "YOGA & RAKKENHO", alt: "Sharath Chandra Kancherla - Sole Pressure" },
   { src: "/images/sck-tutuor.jpeg", tag: "NLP COACH & MENTOR", alt: "Sharath Chandra Kancherla - Habit Adjustments" },
