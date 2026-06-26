@@ -29,9 +29,11 @@ export default function Home() {
           <About />
         </ScrollReveal>
         
-        <ScrollReveal>
-          <SomaticPathwayFinder />
-        </ScrollReveal>
+        {false && (
+          <ScrollReveal>
+            <SomaticPathwayFinder />
+          </ScrollReveal>
+        )}
         
         <ScrollReveal>
           <MindfulFocusTrainer />

@@ -9,8 +9,24 @@ import HangingLotus from "@/components/ui/HangingLotus";
 
 type BreathStateType = "Inhale" | "Hold" | "Exhale" | "HoldAgain";
 
+const slideshowImages = [
+  { src: "/images/profile-hero1.jpeg", tag: "PRANIC INSTRUCTOR", alt: "Sharath Chandra Kancherla - CST touch" },
+  { src: "/images/sck-music.jpeg", tag: "MUSIC THERAPIST", alt: "Sharath Chandra Kancherla - Swara Frequencies" },
+  { src: "/images/sck-yoga.jpeg", tag: "YOGA & RAKKENHO", alt: "Sharath Chandra Kancherla - Sole Pressure" },
+  { src: "/images/sck-tutuor.jpeg", tag: "NLP COACH & MENTOR", alt: "Sharath Chandra Kancherla - Habit Adjustments" },
+  { src: "/images/sck-cool.jpeg", tag: "VEDIC ASTROLOGER", alt: "Sharath Chandra Kancherla - Chart Reading" }
+];
+
 export default function Hero() {
   const [cycleTime, setCycleTime] = useState(0);
+  const [imgIndex, setImgIndex] = useState(0);
+
+  useEffect(() => {
+    const slideTimer = setInterval(() => {
+      setImgIndex((prev) => (prev + 1) % slideshowImages.length);
+    }, 4000);
+    return () => clearInterval(slideTimer);
+  }, []);
 
   useEffect(() => {
     const hasSeen = typeof window !== "undefined" && sessionStorage.getItem("hasSeenIntro") === "true";
@@ -110,18 +126,40 @@ export default function Hero() {
               <div className="absolute inset-0 border border-gold/25 m-2.5 pointer-events-none" />
               
               <div className="relative w-full h-full overflow-hidden border border-stone">
-                <Image
-                  src="/images/profile-hero1.jpeg"
-                  alt="Sharath Chandra Kancherla"
-                  fill
-                  priority
-                  className="object-cover transition-transform duration-[1200ms] hover:scale-103"
-                  sizes="(min-width: 1024px) 30vw, 85vw"
-                />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={imgIndex}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                    <Image
+                      src={slideshowImages[imgIndex].src}
+                      alt={slideshowImages[imgIndex].alt}
+                      fill
+                      priority
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 30vw, 85vw"
+                    />
+                  </motion.div>
+                </AnimatePresence>
               </div>
               
-              <div className="absolute -bottom-4 right-6 bg-clay text-paper text-[9px] font-mono tracking-widest font-bold px-4 py-1.5 shadow-md">
-                PRANIC INSTRUCTOR
+              <div className="absolute -bottom-4 right-6 bg-clay text-paper text-[9px] font-mono tracking-widest font-bold px-4 py-1.5 shadow-md min-w-[150px] text-center z-30 overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={imgIndex}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.3 }}
+                    className="block"
+                  >
+                    {slideshowImages[imgIndex].tag}
+                  </motion.span>
+                </AnimatePresence>
               </div>
             </div>
             
@@ -134,7 +172,7 @@ export default function Hero() {
 
           <motion.div
             variants={itemVariants}
-            className="lg:col-span-7 flex flex-col items-start gap-8"
+            className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left gap-8 w-full"
           >
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-light/60 border border-stone rounded-none mb-4">
@@ -149,7 +187,7 @@ export default function Hero() {
                 <span className="font-serif italic font-normal text-clay">Reclaim Stillness.</span>
               </h1>
               
-              <p className="mt-4 font-serif italic text-xs tracking-wider text-ink-soft bg-stone-light/40 border-l border-clay/60 pl-4 py-1 max-w-xl">
+              <p className="mt-4 font-serif italic text-xs tracking-wider text-ink-soft bg-stone-light/40 border-l border-clay/60 pl-4 py-1 max-w-xl mx-auto lg:mx-0">
                 <span className="font-hindi not-italic font-normal block mb-1 text-[13.5px]">&ldquo;असतो मा सद्गमय &bull; तमसो मा ज्योतिर्गमय &bull; मृत्योर्मा अमृतं गमय&rdquo;</span>
                 <span className="text-[11.5px] font-sans tracking-wide text-ink-soft/80 block mt-1 not-italic">
                   Lead me from ignorance to truth, from darkness to light, from death to immortality.
@@ -161,14 +199,14 @@ export default function Hero() {
               <p className="text-sm leading-relaxed text-ink-soft font-light">
                 I integrate restorative bio-dynamic CranioSacral touch, rhythmic foot pressure, vocal harmonics, and chart guidance to realign the body. This is a dedicated sanctuary crafted for your body to recall its innate pattern of rest.
               </p>
-              <div className="text-right mt-4 w-full">
+              <div className="text-center lg:text-right mt-4 w-full">
                 <span className="font-hindi font-bold text-clay text-lg sm:text-xl block">
                   — Sharath Chandra Kancherla
                 </span>
               </div>
             </div>
 
-            <div className="w-full max-w-xl border border-stone bg-paper p-5.5 rounded-none shadow-sm relative overflow-hidden">
+             <div className="w-full max-w-xl border border-stone bg-paper p-5.5 rounded-none shadow-sm relative overflow-hidden mx-auto lg:mx-0">
               <div className="flex items-center gap-5 relative z-10">
                 <div className="relative flex items-center justify-center shrink-0">
                   <motion.div
@@ -229,7 +267,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2">
+             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2 justify-center lg:justify-start">
               <a
                 href="#sessions"
                 className="group inline-flex items-center justify-center gap-3 bg-ink text-paper px-8 py-4.5 text-xs uppercase tracking-widest font-semibold transition-all duration-300 hover:bg-[#201715] hover:-translate-y-0.5 active:translate-y-0 shadow-md border border-ink"

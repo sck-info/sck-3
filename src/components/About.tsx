@@ -40,7 +40,7 @@ export default function About() {
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start relative z-10">
           
-          <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-28">
+          <div className="lg:col-span-4 flex flex-col gap-6 lg:sticky lg:top-28 items-center lg:items-start text-center lg:text-left">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-clay" />
               <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-ink-soft">
@@ -57,7 +57,7 @@ export default function About() {
               Over the past decade, my work has focused on bridging traditional Eastern wellness with modern corporate lifestyles. Through direct touch, vibrational acoustics, and cognitive alignments, I aim to create spaces where deep healing happens naturally.
             </p>
 
-            <div className="border border-stone p-5 bg-stone-light/10 text-[11px] leading-relaxed text-ink-soft italic relative">
+            <div className="border border-stone p-5 bg-stone-light/10 text-[11px] leading-relaxed text-ink-soft italic relative text-center lg:text-left mx-auto lg:mx-0 w-full max-w-sm lg:max-w-none">
               <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-clay" />
               <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-clay" />
               <p className="font-hindi text-ink not-italic text-sm">
