@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans, Poppins } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans, Poppins, Martel } from "next/font/google";
 import "./globals.css";
 import CaptureProtection from "@/components/CaptureProtection";
 
@@ -20,6 +20,12 @@ const poppinsFont = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const martelFont = Martel({
+  variable: "--font-hindi",
+  subsets: ["latin", "devanagari"],
+  weight: ["300", "400", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -48,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${displayFont.variable} ${bodyFont.variable} ${poppinsFont.variable} scroll-smooth`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${poppinsFont.variable} ${martelFont.variable} scroll-smooth`}
     >
       <head>
         <script

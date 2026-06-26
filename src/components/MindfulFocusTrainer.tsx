@@ -275,9 +275,9 @@ export default function MindfulFocusTrainer() {
           ))}
         </div>
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-5xl mx-auto min-h-[380px]">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center max-w-5xl mx-auto min-h-[380px]">
           
-          <div className="lg:col-span-6 flex flex-col items-center justify-center">
+          <div className="md:col-span-6 lg:col-span-6 flex flex-col items-center justify-center">
             <AnimatePresence mode="wait">
               
               {activeTab === "dharana" && (
@@ -421,7 +421,7 @@ export default function MindfulFocusTrainer() {
             </AnimatePresence>
           </div>
 
-          <div className="lg:col-span-6 flex flex-col items-stretch justify-center p-8 bg-paper border border-stone min-h-[260px] relative">
+          <div className="md:col-span-6 lg:col-span-6 flex flex-col items-stretch justify-center p-8 bg-paper border border-stone min-h-[260px] relative">
             <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-stone-light" />
             <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-stone-light" />
 
@@ -436,10 +436,10 @@ export default function MindfulFocusTrainer() {
                   className="flex flex-col gap-4"
                 >
                   <h3 className="font-display text-2xl font-light text-ink">
-                    Dharana: Breathing Wave
+                    <span className="font-serif italic text-clay font-normal">Dharana</span>: Breathing Wave
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-ink-soft leading-relaxed font-light">
-                    Sama Vritti (Equal Breathing). Press the button or the <kbd className="px-1.5 py-0.5 border border-stone bg-stone-light/40 rounded text-[10px] font-mono font-bold">Spacebar</kbd> when the expanding wave enters the golden stillness circle.
+                  <p className="text-xs sm:text-[13px] text-ink leading-relaxed font-normal">
+                    <span className="font-serif italic text-clay font-semibold">Sama Vritti</span> (Equal Breathing). Press the button or the <kbd className="px-1.5 py-0.5 border border-stone bg-stone-light/40 rounded text-[10px] font-mono font-bold text-ink">Spacebar</kbd> when the expanding wave enters the <span className="font-serif italic text-clay font-semibold">golden stillness circle</span>.
                   </p>
                   
                   {waveGameState === "idle" && (
@@ -500,10 +500,10 @@ export default function MindfulFocusTrainer() {
                   className="flex flex-col gap-4"
                 >
                   <h3 className="font-display text-2xl font-light text-ink">
-                    Naada: Healing Frequencies
+                    <span className="font-serif italic text-clay font-normal">Naada</span>: Healing Frequencies
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-ink-soft leading-relaxed font-light">
-                    Interact with sound resonance. Click or tap the brass bowl to strike a grounding frequency. Hover or click the chimes to play harmonious ascending tones.
+                  <p className="text-xs sm:text-[13px] text-ink leading-relaxed font-normal">
+                    Interact with <span className="font-serif italic text-clay font-semibold">sound resonance</span>. Click or tap the brass bowl to strike a <span className="font-serif italic text-clay font-semibold">grounding frequency</span>. Hover or click the chimes to play <span className="font-serif italic text-clay font-semibold">harmonious ascending tones</span>.
                   </p>
                   <div className="grid grid-cols-2 gap-2.5 mt-2">
                     <button
@@ -538,10 +538,10 @@ export default function MindfulFocusTrainer() {
                   className="flex flex-col gap-4"
                 >
                   <h3 className="font-display text-2xl font-light text-ink">
-                    Jyotisha: Planetary Orbit
+                    <span className="font-serif italic text-clay font-normal">Jyotisha</span>: Planetary Orbit
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-ink-soft leading-relaxed font-light">
-                    Drag the orbital sliders to align the Moon (outer) and Jupiter (inner) at the top golden portal (180&deg;) to unlock planetary alignment readings.
+                  <p className="text-xs sm:text-[13px] text-ink leading-relaxed font-normal">
+                    Drag the orbital sliders to align the <span className="font-serif italic text-clay font-semibold">Moon</span> (outer) and <span className="font-serif italic text-clay font-semibold">Jupiter</span> (inner) at the top golden portal (180&deg;) to unlock <span className="font-serif italic text-clay font-semibold">planetary alignment readings</span>.
                   </p>
 
                   <div className="flex flex-col gap-3 mt-2 w-full">

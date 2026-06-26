@@ -14,7 +14,8 @@ interface TabConfig {
   id: CategoryType;
   label: string;
   subLabel: string;
-  explanation: string;
+  sanskritQuote: string;
+  englishQuote: string;
   formUrl: string;
   buttonText: string;
 }
@@ -24,8 +25,8 @@ const tabsConfig: TabConfig[] = [
     id: "therapy",
     label: "Therapy Sessions",
     subLabel: "CST, Rakkenho & Sound Therapy",
-    explanation:
-      "Physical and emotional restoration through gentle touch, traditional Japanese rhythmic foot pressure, and sound frequency therapy. Designed to regulate the nervous system, release deeply held physical trauma, and guide the body into deep relaxation.",
+    sanskritQuote: "शरीरमाद्यं खलु धर्मसाधनम् • आरोग्यं परमं भाग्यं स्वास्थ्यं सर्वार्थसाधनम्",
+    englishQuote: "The body is the primary vehicle for life's purpose. Complete physical and emotional restoration is the ultimate fortune, and absolute wellness is the key to achieving all tasks.",
     formUrl: "https://forms.gle/REPLACE_WITH_THERAPY_FORM",
     buttonText: "Register for Therapy Sessions",
   },
@@ -33,8 +34,8 @@ const tabsConfig: TabConfig[] = [
     id: "consultation",
     label: "1-on-1 Consultations",
     subLabel: "Astrology & Palmistry Readings",
-    explanation:
-      "Timeless planetary charts, hand structures, and questions-based horary analysis to map life paths, relationships, and health tendencies. These consultations offer deep, customized insights and guidance without requiring complex details.",
+    sanskritQuote: "ज्योतिषं ज्ञानचक्षुषां मार्गदर्शकम् • तमसो मा ज्योतिर्गमय",
+    englishQuote: "Vedic insight is the guiding eye of knowledge. Lead me from the darkness of uncertainty to the light of cosmic clarity, mapping out relationships and hand structures to align our life directions.",
     formUrl: "https://forms.gle/REPLACE_WITH_CONSULTATION_FORM",
     buttonText: "Book a 1-on-1 Consultation",
   },
@@ -42,8 +43,8 @@ const tabsConfig: TabConfig[] = [
     id: "classes_workshops",
     label: "Classes & Workshops",
     subLabel: "Music, NLP & Lifestyle Coaching",
-    explanation:
-      "Accelerated growth programs featuring Carnatic vocal training, Neuro-Linguistic programming (NLP) subconscious habit adjustments, and a comprehensive nutrition course to help you cultivate balance, energy, and mental agility.",
+    sanskritQuote: "नादब्रह्म परानन्दः • ज्ञानेन हि सदृशं पवित्रमिह न विद्यते",
+    englishQuote: "Sound resonance is the supreme joy, and there is no purifier in this world like mindful learning. We adjust subconscious habits, vocal swaras, and nutrition to cultivate balanced energy.",
     formUrl: "https://forms.gle/REPLACE_WITH_WORKSHOPS_FORM",
     buttonText: "Register for Classes & Workshops",
   },
@@ -127,11 +128,14 @@ export default function Sessions() {
           })}
         </div>
 
-        <div className="mt-8 border-x border-b border-stone p-8 sm:p-10 bg-stone-light/15 relative">
+        <div className="mt-8 border-x border-b border-stone p-8 sm:p-10 bg-stone-light/15 relative text-center flex flex-col gap-2.5">
           <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay/30" />
           <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-clay/30" />
-          <p className="font-serif text-sm italic text-ink-soft leading-relaxed text-center max-w-3xl mx-auto">
-            &ldquo;{activeTabConfig.explanation}&rdquo;
+          <p className="font-hindi text-lg sm:text-xl text-clay font-normal tracking-wide">
+            &ldquo;{activeTabConfig.sanskritQuote}&rdquo;
+          </p>
+          <p className="font-sans text-xs italic text-ink-soft leading-relaxed max-w-3xl mx-auto font-light">
+            {activeTabConfig.englishQuote}
           </p>
         </div>
 

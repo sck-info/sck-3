@@ -19,7 +19,7 @@ export default function Hero() {
     const startTimer = () => {
       if (timerId) return;
       timerId = setInterval(() => {
-        setCycleTime((t) => (t + 1) % 16);
+        setCycleTime((t) => (t + 1) % 18);
       }, 1000);
     };
 
@@ -41,11 +41,22 @@ export default function Hero() {
     };
   }, []);
 
-  const phaseIndex = Math.floor(cycleTime / 4);
-  const breathCount = 4 - (cycleTime % 4);
-  
-  const states: BreathStateType[] = ["Inhale", "Hold", "Exhale", "HoldAgain"];
-  const breathState = states[phaseIndex];
+  let breathState: BreathStateType = "Inhale";
+  let breathCount = 6;
+
+  if (cycleTime < 6) {
+    breathState = "Inhale";
+    breathCount = 6 - cycleTime;
+  } else if (cycleTime < 10) {
+    breathState = "Hold";
+    breathCount = 4 - (cycleTime - 6);
+  } else if (cycleTime < 16) {
+    breathState = "Exhale";
+    breathCount = 6 - (cycleTime - 10);
+  } else {
+    breathState = "HoldAgain";
+    breathCount = 2 - (cycleTime - 16);
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -71,6 +82,8 @@ export default function Hero() {
     >
       <HangingLotus align="right" />
       <HangingLotus align="right" offset="right-16 sm:right-28" className="top-8 opacity-75 scale-90" />
+      <HangingLotus align="right" offset="right-28 sm:right-44" className="top-16 opacity-50 scale-75" />
+      <HangingLotus align="right" offset="right-36 sm:right-56" className="top-24 opacity-30 scale-[0.6]" />
 
       <div className="absolute top-0 left-0 w-full h-[1px] bg-stone/70" />
       
@@ -137,17 +150,22 @@ export default function Hero() {
               </h1>
               
               <p className="mt-4 font-serif italic text-xs tracking-wider text-ink-soft bg-stone-light/40 border-l border-clay/60 pl-4 py-1 max-w-xl">
-                &ldquo;असतो मा सद्गमय &bull; तमसो मा ज्योतिर्गमय &bull; मृत्योर्मा अमृतं गमय&rdquo;<br />
-                <span className="text-[10px] font-sans tracking-wide text-ink-soft/80 block mt-1 not-italic">
+                <span className="font-hindi not-italic font-normal block mb-1 text-[13.5px]">&ldquo;असतो मा सद्गमय &bull; तमसो मा ज्योतिर्गमय &bull; मृत्योर्मा अमृतं गमय&rdquo;</span>
+                <span className="text-[11.5px] font-sans tracking-wide text-ink-soft/80 block mt-1 not-italic">
                   Lead me from ignorance to truth, from darkness to light, from death to immortality.
                 </span>
               </p>
             </div>
 
-            <div className="max-w-xl">
+            <div className="max-w-xl w-full">
               <p className="text-sm leading-relaxed text-ink-soft font-light">
-                I am <span className="font-semibold text-ink">Sharath Chandra Kancherla</span>. I integrate restorative bio-dynamic CranioSacral touch, rhythmic foot pressure, vocal harmonics, and chart guidance to realign the body. This is a dedicated sanctuary crafted for your body to recall its innate pattern of rest.
+                I integrate restorative bio-dynamic CranioSacral touch, rhythmic foot pressure, vocal harmonics, and chart guidance to realign the body. This is a dedicated sanctuary crafted for your body to recall its innate pattern of rest.
               </p>
+              <div className="text-right mt-4 w-full">
+                <span className="font-hindi font-bold text-clay text-lg sm:text-xl block">
+                  — Sharath Chandra Kancherla
+                </span>
+              </div>
             </div>
 
             <div className="w-full max-w-xl border border-stone bg-paper p-5.5 rounded-none shadow-sm relative overflow-hidden">
@@ -158,7 +176,7 @@ export default function Hero() {
                       scale: (breathState === "Inhale" || breathState === "Hold") ? 1.22 : 1,
                     }}
                     transition={{
-                      duration: 4,
+                      duration: (breathState === "Inhale" || breathState === "Exhale") ? 6 : (breathState === "Hold" ? 4 : 2),
                       ease: "easeInOut",
                     }}
                     className={`w-14 h-14 rounded-full border flex items-center justify-center transition-colors duration-500 ${

@@ -23,7 +23,7 @@ const testimonials = [
     therapy: "Music Therapy",
   },
   {
-    name: "Harshit",
+    name: "Harshith",
     role: "Entrepreneur",
     text: "The Vedic astrology reading was eye-opening. Sharath doesn't just read charts; he translates planetary patterns into practical life guidance. It gave me absolute clarity on my career path during a major transition phase.",
     therapy: "Vedic Astrology",

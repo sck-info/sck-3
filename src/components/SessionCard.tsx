@@ -22,6 +22,20 @@ export default function SessionCard({
   const [expanded, setExpanded] = useState(false);
   const panelId = `${session.id}-additional-info`;
 
+  const isTherapy = session.category === "therapy";
+  const isClassOrWorkshop = session.category === "class" || session.category === "workshop";
+
+  let hoverBorderClass = "border-clay";
+  let hoverDecorClass = "border-clay";
+
+  if (isTherapy) {
+    hoverBorderClass = "border-moss";
+    hoverDecorClass = "border-moss";
+  } else if (isClassOrWorkshop) {
+    hoverBorderClass = "border-blue-600";
+    hoverDecorClass = "border-[#2563eb]";
+  }
+
   return (
     <div
       id={session.id}
@@ -29,7 +43,7 @@ export default function SessionCard({
       onMouseLeave={onLeave}
       className={`flex flex-col justify-between border bg-stone-light/10 p-6 sm:p-8 transition-all duration-500 ease-out h-full relative ${
         isHovered
-          ? "border-clay -translate-y-2.5 shadow-lg z-20 scale-[1.02] bg-paper"
+          ? `${hoverBorderClass} -translate-y-2.5 shadow-lg z-20 scale-[1.02] bg-paper`
           : isAnyHovered
           ? "border-stone/40 opacity-40 blur-[0.5px] scale-[0.98]"
           : "border-stone bg-stone-light/10"
@@ -37,10 +51,10 @@ export default function SessionCard({
     >
       {isHovered && (
         <>
-          <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay" />
-          <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-clay" />
-          <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-clay" />
-          <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-clay" />
+          <div className={`absolute top-2 left-2 w-2 h-2 border-t border-l ${hoverDecorClass}`} />
+          <div className={`absolute top-2 right-2 w-2 h-2 border-t border-r ${hoverDecorClass}`} />
+          <div className={`absolute bottom-2 left-2 w-2 h-2 border-b border-l ${hoverDecorClass}`} />
+          <div className={`absolute bottom-2 right-2 w-2 h-2 border-b border-r ${hoverDecorClass}`} />
         </>
       )}
 

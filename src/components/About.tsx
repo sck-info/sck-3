@@ -60,10 +60,10 @@ export default function About() {
             <div className="border border-stone p-5 bg-stone-light/10 text-[11px] leading-relaxed text-ink-soft italic relative">
               <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-clay" />
               <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-clay" />
-              <p className="font-serif text-ink">
+              <p className="font-hindi text-ink not-italic text-sm">
                 &ldquo;श्रद्धावान् लभते ज्ञानं तत्परः संयतेन्द्रियः&rdquo;
               </p>
-              <p className="text-[9px] font-sans tracking-wide text-ink-soft/80 mt-1 not-italic uppercase font-semibold">
+              <p className="text-[10.5px] font-sans tracking-wide text-ink-soft/80 mt-1 not-italic uppercase font-semibold">
                 The dedicated seeker acquires true wisdom.
               </p>
             </div>
@@ -85,7 +85,7 @@ export default function About() {
                   Our Vision
                 </h3>
                 <p className="text-xs leading-relaxed text-ink-soft font-light">
-                  To inspire and uplift one billion lives through healing,
+                  <span className="bg-gold/25 text-ink font-semibold px-1 rounded-sm">To inspire and uplift one billion lives</span> through healing,
                   wisdom, music, and conscious living—nurturing a world that
                   lives as one global family.
                 </p>
@@ -97,8 +97,7 @@ export default function About() {
                 </h3>
                 <p className="text-xs leading-relaxed text-ink-soft font-light">
                   To empower individuals with practical tools for holistic
-                  well-being through meditation, yoga, breathwork, music,
-                  education, and timeless wisdom, enabling them to live
+                  well-being <span className="bg-gold/25 text-ink font-semibold px-1 rounded-sm">through meditation, yoga, breathwork, music, education, and timeless wisdom</span>, enabling them to live
                   healthier, happier, and more purposeful lives.
                 </p>
               </div>

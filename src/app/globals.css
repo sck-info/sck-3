@@ -114,3 +114,7 @@ button:focus-visible {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+.font-hindi {
+  font-family: var(--font-hindi), serif;
+}

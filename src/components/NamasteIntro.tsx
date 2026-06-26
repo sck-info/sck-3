@@ -16,7 +16,7 @@ export default function NamasteIntro() {
     } else {
       setIsComplete(false);
       setShouldRender(true);
-      
+
       document.body.style.overflow = "hidden";
       const timer = setTimeout(() => {
         setIsComplete(true);
@@ -24,7 +24,7 @@ export default function NamasteIntro() {
         document.body.style.overflow = "";
         document.documentElement.classList.remove("intro-active");
         window.dispatchEvent(new Event("intro-complete"));
-      }, 3200);
+      }, 4500);
 
       return () => {
         clearTimeout(timer);
@@ -42,43 +42,43 @@ export default function NamasteIntro() {
         <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden pointer-events-none">
           <motion.div
             initial={{ y: 0 }}
-            exit={{ 
+            exit={{
               y: "-100%",
-              transition: { duration: 1.2, ease: [0.77, 0, 0.175, 1] } 
+              transition: { duration: 1.2, ease: [0.77, 0, 0.175, 1] },
             }}
             className="absolute top-0 left-0 w-full h-[50.5vh] bg-[#8A2512] border-b border-[#C99738]/20 pointer-events-auto"
           />
 
           <motion.div
             initial={{ y: 0 }}
-            exit={{ 
+            exit={{
               y: "100%",
-              transition: { duration: 1.2, ease: [0.77, 0, 0.175, 1] } 
+              transition: { duration: 1.2, ease: [0.77, 0, 0.175, 1] },
             }}
             className="absolute bottom-0 left-0 w-full h-[50.5vh] bg-[#8A2512] border-t border-[#C99738]/20 pointer-events-auto"
           />
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ 
-              opacity: 1, 
+            animate={{
+              opacity: 1,
               scale: 1,
-              transition: { duration: 0.8, ease: "easeOut" }
+              transition: { duration: 0.8, ease: "easeOut" },
             }}
-            exit={{ 
-              opacity: 0, 
+            exit={{
+              opacity: 0,
               scale: 1.05,
               y: -20,
-              transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] } 
+              transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] },
             }}
             className="relative z-[10000] flex flex-col items-center text-center px-4"
           >
             <motion.div
               initial={{ rotate: -8, opacity: 0 }}
-              animate={{ 
-                rotate: 0, 
+              animate={{
+                rotate: 0,
                 opacity: 1,
-                transition: { delay: 0.2, duration: 1, ease: "easeOut" }
+                transition: { delay: 0.2, duration: 1, ease: "easeOut" },
               }}
               className="mb-5"
             >
@@ -126,10 +126,10 @@ export default function NamasteIntro() {
 
             <motion.h1
               initial={{ letterSpacing: "0.15em", opacity: 0 }}
-              animate={{ 
-                letterSpacing: "0.25em", 
+              animate={{
+                letterSpacing: "0.25em",
                 opacity: 1,
-                transition: { delay: 0.4, duration: 1.2, ease: "easeOut" }
+                transition: { delay: 0.4, duration: 1.2, ease: "easeOut" },
               }}
               className="font-display italic text-4xl sm:text-6xl text-[#E8C374] font-medium leading-none tracking-widest uppercase"
             >
@@ -138,25 +138,25 @@ export default function NamasteIntro() {
 
             <motion.p
               initial={{ opacity: 0, y: 5 }}
-              animate={{ 
-                opacity: 0.6, 
+              animate={{
+                opacity: 0.6,
                 y: 0,
-                transition: { delay: 0.8, duration: 0.8 }
+                transition: { delay: 0.8, duration: 0.8 },
               }}
-              className="text-sm tracking-[0.3em] text-[#FAF6F0] font-light mt-4"
+              className="text-sm tracking-[0.3em] text-[#FAF6F0] font-light mt-4 font-hindi"
             >
               नमस्ते
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ 
+              animate={{
                 opacity: 0.5,
-                transition: { delay: 1.3, duration: 1.2 }
+                transition: { delay: 1.3, duration: 1.2 },
               }}
               className="text-[10px] italic text-[#FAF6F0] mt-8 tracking-widest font-mono font-light"
             >
-              A space for the body to remember how to rest
+              A space for the body and mind to reset and realize the spirit
             </motion.p>
           </motion.div>
         </div>
