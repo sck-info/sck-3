@@ -23,11 +23,11 @@ export default function Home() {
         <Hero />
         
         <ScrollReveal>
-          <Metrics />
+          <About />
         </ScrollReveal>
         
         <ScrollReveal>
-          <About />
+          <Metrics />
         </ScrollReveal>
         
         {false && (
