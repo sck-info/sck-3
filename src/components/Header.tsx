@@ -71,6 +71,35 @@ const palettes = {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePalette, setActivePalette] = useState<"current" | "sck-4" | "forest-zen">("current");
+  const [heroTemplate, setHeroTemplate] = useState<"template1" | "template2">("template1");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const savedTemplate = localStorage.getItem("hero-template");
+    if (savedTemplate === "template2") {
+      setHeroTemplate("template2");
+    }
+    const handleTemplateChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ template: "template1" | "template2" }>;
+      if (customEvent.detail && customEvent.detail.template) {
+        setHeroTemplate(customEvent.detail.template);
+      }
+    };
+    window.addEventListener("change-hero-template", handleTemplateChange);
+    return () => window.removeEventListener("change-hero-template", handleTemplateChange);
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem("selected-palette");
@@ -101,14 +130,33 @@ export default function Header() {
     }
   };
 
+  const isTemplate2 = heroTemplate === "template2";
+
   return (
-    <header className="sticky top-0 z-50 border-b border-stone bg-paper/80 backdrop-blur-md transition-all duration-300">
-      <Container className="flex items-center justify-between py-5">
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      isTemplate2 
+        ? isScrolled 
+          ? "bg-[#090A0F]/95 text-paper border-b border-white/10 backdrop-blur-md shadow-lg py-3.5" 
+          : "bg-transparent text-paper border-none py-5" 
+        : isScrolled
+          ? "bg-paper/95 text-ink border-b border-stone backdrop-blur-md shadow-sm py-3.5"
+          : "bg-transparent text-ink border-none py-5"
+    }`}>
+      <Container className="flex items-center justify-between">
         <a 
           href="#top" 
-          className="font-display text-xl font-medium tracking-tight text-ink hover:opacity-80 transition-opacity"
+          className="group flex flex-col items-start transition-opacity hover:opacity-90"
         >
-          Sharath Chandra <span className="font-serif italic font-normal">Kancherla</span>
+          <span className={`font-display text-xl sm:text-2xl font-medium tracking-tight ${
+            isTemplate2 ? "text-paper" : "text-ink"
+          }`}>
+            Sharath Chandra <span className="font-serif italic font-normal text-clay">Kancherla</span>
+          </span>
+          <span className={`text-[9px] font-mono tracking-[0.25em] uppercase font-semibold mt-0.5 ${
+            isTemplate2 ? "text-paper/60" : "text-ink-soft/70"
+          }`}>
+            EST. 2012 / HOLISTIC MENTOR
+          </span>
         </a>
 
         <div className="flex items-center gap-6">
@@ -119,7 +167,9 @@ export default function Header() {
                   <div key={link.href} className="relative group inline-flex items-center">
                     <a
                       href={link.href}
-                      className="text-xs uppercase tracking-widest font-medium text-ink-soft hover:text-ink transition-colors inline-flex items-center gap-1 leading-none"
+                      className={`text-xs uppercase tracking-widest font-medium transition-colors inline-flex items-center gap-1 leading-none ${
+                        isTemplate2 ? "text-paper/80 hover:text-paper" : "text-ink-soft hover:text-ink"
+                      }`}
                     >
                       <span>{link.label}</span>
                       <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180 text-clay" />
@@ -146,7 +196,9 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-xs uppercase tracking-widest font-medium text-ink-soft hover:text-ink transition-colors inline-flex items-center leading-none"
+                  className={`text-xs uppercase tracking-widest font-medium transition-colors inline-flex items-center leading-none ${
+                    isTemplate2 ? "text-paper/80 hover:text-paper" : "text-ink-soft hover:text-ink"
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -154,29 +206,60 @@ export default function Header() {
             })}
           </nav>
 
-          <div className="hidden sm:flex items-center gap-2 border-l border-stone pl-6 py-1">
-            <span className="text-[9px] uppercase tracking-wider font-mono font-medium text-ink-soft/70 mr-1">Palette:</span>
-            <div className="flex gap-2">
-              {Object.entries(palettes).map(([key, palette]) => (
-                <button
-                  key={key}
-                  onClick={() => changePalette(key as any)}
-                  className="w-4 h-4 rounded-full border transition-all duration-300 relative group cursor-pointer"
-                  style={{ 
-                    backgroundColor: palette.previewColor,
-                    borderColor: activePalette === key ? "var(--color-clay)" : "rgba(0, 0, 0, 0.15)"
-                  }}
-                  title={palette.name}
-                  aria-label={`Switch to ${palette.name} theme`}
-                >
-                  {activePalette === key && (
-                    <span className="absolute inset-0 rounded-full border border-paper scale-75 block" />
-                  )}
-                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-[8px] tracking-wide font-mono bg-ink text-paper opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity rounded whitespace-nowrap z-50">
-                    {palette.name}
-                  </span>
-                </button>
-              ))}
+          <div className="hidden md:flex items-center gap-4 border-l border-stone/40 pl-6 py-1">
+            <div className="flex items-center gap-1.5 font-mono text-[10px]">
+              <span className={`uppercase tracking-wider font-medium mr-1 ${isTemplate2 ? "text-paper/60" : "text-ink-soft/70"}`}>Hero:</span>
+              <button
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("change-hero-template", { detail: { template: "template1" } }));
+                  localStorage.setItem("hero-template", "template1");
+                }}
+                className={`px-1.5 py-0.5 tracking-wider transition-colors cursor-pointer ${
+                  !isTemplate2 ? "font-bold text-clay underline underline-offset-4" : "text-paper/60 hover:text-paper"
+                }`}
+              >
+                T1
+              </button>
+              <span className={isTemplate2 ? "text-paper/30" : "text-stone"}>|</span>
+              <button
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("change-hero-template", { detail: { template: "template2" } }));
+                  localStorage.setItem("hero-template", "template2");
+                }}
+                className={`px-1.5 py-0.5 tracking-wider transition-colors cursor-pointer ${
+                  isTemplate2 ? "font-bold text-clay underline underline-offset-4" : "text-ink-soft hover:text-ink"
+                }`}
+              >
+                T2
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2 border-l border-stone pl-4">
+              <span className="text-[9px] uppercase tracking-wider font-mono font-medium text-ink-soft/70 mr-1">Palette:</span>
+              <div className="flex gap-2">
+                {Object.entries(palettes).map(([key, palette]) => (
+                  <button
+                    key={key}
+                    onClick={() => changePalette(key as any)}
+                    className="w-4 h-4 rounded-full border transition-all duration-300 relative group cursor-pointer"
+                    style={{ 
+                      backgroundColor: palette.previewColor,
+                      borderColor: activePalette === key ? "var(--color-clay)" : "rgba(0, 0, 0, 0.15)"
+                    }}
+                    title={palette.name}
+                    aria-label={`Switch to ${palette.name} theme`}
+                  >
+                    {activePalette === key && (
+                      <span className="absolute inset-0 rounded-full border border-paper scale-75 block" />
+                    )}
+                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-[8px] tracking-wide font-mono bg-ink text-paper opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity rounded whitespace-nowrap z-50">
+                      {palette.name}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
