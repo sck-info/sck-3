@@ -102,8 +102,8 @@ export default function Sessions() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-stone">
-          {tabsConfig.map((tab) => {
+        <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 border border-stone">
+          {tabsConfig.map((tab, index) => {
             const isActive = activeTab === tab.id;
             return (
               <button
@@ -113,7 +113,11 @@ export default function Sessions() {
                   setActiveTab(tab.id);
                   setHoveredId(null);
                 }}
-                className="relative flex flex-col items-center text-center py-6 px-3 cursor-pointer transition-all duration-300 overflow-hidden outline-none border-b sm:border-b-0 sm:border-r border-stone last:border-r-0"
+                className={`relative flex flex-col items-center justify-center text-center py-4 sm:py-6 px-2 sm:px-3 cursor-pointer transition-all duration-300 overflow-hidden outline-none border-stone ${
+                  index % 2 === 0 ? "border-r" : "border-r-0 lg:border-r"
+                } ${index < 2 ? "border-b lg:border-b-0" : "border-b-0"} ${
+                  index === 3 ? "lg:border-r-0" : ""
+                }`}
               >
                 {isActive && (
                   <motion.div
@@ -124,7 +128,7 @@ export default function Sessions() {
                 )}
 
                 <span
-                  className={`relative z-10 font-display text-base sm:text-lg font-medium transition-colors duration-300 ${
+                  className={`relative z-10 font-display text-sm sm:text-base lg:text-lg font-medium transition-colors duration-300 ${
                     isActive ? "text-paper" : "text-ink hover:text-clay"
                   }`}
                 >
@@ -132,7 +136,7 @@ export default function Sessions() {
                 </span>
 
                 <span
-                  className={`relative z-10 text-[10px] sm:text-[11px] font-mono mt-1 tracking-wider uppercase transition-colors duration-300 ${
+                  className={`relative z-10 text-[9px] sm:text-[11px] font-mono mt-1 tracking-wider uppercase transition-colors duration-300 ${
                     isActive ? "text-paper/70" : "text-ink-soft"
                   }`}
                 >

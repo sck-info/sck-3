@@ -44,7 +44,7 @@ export default function About() {
       <Container>
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-[10px] font-mono tracking-[0.25em] font-bold text-moss uppercase bg-stone-light/60 px-4 py-1.5 border border-stone inline-flex items-center gap-2">
-            SADHANA &bull; BIOGRAPHICAL NARRATIVE
+            JEEVANA YATRA &bull; BIOGRAPHICAL NARRATIVE
           </span>
           <h2 className="mt-4 font-display text-4xl sm:text-5xl font-medium tracking-tight text-ink">
             Sharath Chandra <span className="font-serif italic font-normal text-clay">Kancherla</span>
