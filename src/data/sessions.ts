@@ -99,18 +99,32 @@ export const sessions: Session[] = [
       "Does not require accurate birth timing. The chart is cast dynamically for the time and place where the query arises, revealing trends and answers for immediate decision-making.",
   },
   {
-    id: "music-classes",
-    name: "Music Classes (Carnatic & Light Music)",
+    id: "music-classes-1on1",
+    name: "Music Classes — 1-on-1 Sessions",
     description:
-      "Structured individual or group lessons focused on vocal development, swara accuracy, and musical appreciation.",
+      "Tailored individual lessons focusing on vocal development, swara precision, and classical Carnatic & light music mastery.",
     formUrl: "https://forms.gle/REPLACE_WITH_CST_FORM",
     category: "class",
     duration: "45 - 60 min per class",
-    format: "1-on-1 & Group",
+    format: "1-on-1",
     mode: "In-person or Online",
-    subDetails: "4 classes per month",
+    subDetails: "Personalized coaching & vocal range expansion",
     additionalInfo:
-      "Tailored for kids and adults, from absolute beginners to advanced levels. Learn vocal breathing techniques, swaras, ragas, and performance skills in classical Carnatic music or light devotional/folk songs.",
+      "Tailored for beginners to advanced seekers. Master vocal breathing, raga scales, and individual performance nuance.",
+  },
+  {
+    id: "music-classes-group",
+    name: "Music Classes — Group Sessions",
+    description:
+      "Collaborative group lessons emphasizing vocal resonance, group chorus harmony, and communal musical appreciation.",
+    formUrl: "https://forms.gle/REPLACE_WITH_CST_FORM",
+    category: "class",
+    duration: "60 min per class",
+    format: "Group",
+    mode: "In-person or Online",
+    subDetails: "Interactive group practice & swara chorus",
+    additionalInfo:
+      "Experience the collective joy of singing in harmony. Perfect for building confidence, vocal rhythm, and group synergy.",
   },
   {
     id: "nlp",

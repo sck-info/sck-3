@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
@@ -8,7 +8,7 @@ import SessionCard from "@/components/SessionCard";
 import { sessions } from "@/data/sessions";
 import HangingLotus from "@/components/ui/HangingLotus";
 
-type CategoryType = "therapy" | "consultation" | "classes_workshops";
+type CategoryType = "therapy" | "consultation" | "class" | "workshop";
 
 interface TabConfig {
   id: CategoryType;
@@ -40,13 +40,22 @@ const tabsConfig: TabConfig[] = [
     buttonText: "Book a 1-on-1 Consultation",
   },
   {
-    id: "classes_workshops",
-    label: "Classes & Workshops",
-    subLabel: "Music, NLP & Lifestyle Coaching",
-    sanskritQuote: "नादब्रह्म परानन्दः • ज्ञानेन हि सदृशं पवित्रमिह न विद्यते",
-    englishQuote: "Sound resonance is the supreme joy, and there is no purifier in this world like mindful learning. We adjust subconscious habits, vocal swaras, and nutrition to cultivate balanced energy.",
+    id: "class",
+    label: "Music Classes",
+    subLabel: "Carnatic & Light Music Training",
+    sanskritQuote: "नादब्रह्म परानन्दः • संगीतं मुक्तिदायकम्",
+    englishQuote: "Sound resonance is the supreme bliss. Dedicated musical practice purifies the soul and unlocks emotional harmony and vocal mastery.",
+    formUrl: "https://forms.gle/REPLACE_WITH_CLASSES_FORM",
+    buttonText: "Register for Music Classes",
+  },
+  {
+    id: "workshop",
+    label: "Workshops",
+    subLabel: "NLP Coaching & Lifestyle Seminars",
+    sanskritQuote: "ज्ञानेन हि सदृशं पवित्रमिह न विद्यते",
+    englishQuote: "There is no purifier in this world like mindful learning. We adjust subconscious habits, cognitive focus, and nutrition to cultivate balanced life energy.",
     formUrl: "https://forms.gle/REPLACE_WITH_WORKSHOPS_FORM",
-    buttonText: "Register for Classes & Workshops",
+    buttonText: "Register for Workshops",
   },
 ];
 
@@ -54,12 +63,18 @@ export default function Sessions() {
   const [activeTab, setActiveTab] = useState<CategoryType>("therapy");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const activeSessions = sessions.filter((session) => {
-    if (activeTab === "therapy") return session.category === "therapy";
-    if (activeTab === "consultation")
-      return session.category === "consultation";
-    return session.category === "class" || session.category === "workshop";
-  });
+  useEffect(() => {
+    const handleSelectTab = (e: Event) => {
+      const customEvent = e as CustomEvent<{ tab: CategoryType }>;
+      if (customEvent.detail && customEvent.detail.tab) {
+        setActiveTab(customEvent.detail.tab);
+      }
+    };
+    window.addEventListener("select-session-tab", handleSelectTab);
+    return () => window.removeEventListener("select-session-tab", handleSelectTab);
+  }, []);
+
+  const activeSessions = sessions.filter((session) => session.category === activeTab);
 
   const activeTabConfig = tabsConfig.find((tab) => tab.id === activeTab)!;
 
@@ -72,22 +87,22 @@ export default function Sessions() {
       <HangingLotus align="right" />
       <Container>
         <div className="flex flex-col items-center text-center">
-          <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-clay bg-stone/40 px-3.5 py-1.5 border border-stone">
-            Our Offerings
+          <span className="text-[10px] font-mono tracking-[0.25em] font-bold text-moss uppercase bg-stone-light/60 px-4 py-1.5 border border-stone inline-flex items-center gap-2">
+            DEHA MANAS &bull; OUR OFFERINGS
           </span>
-          <h2 className="mt-4 font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+          <h2 className="mt-4 font-display text-4xl sm:text-5xl font-medium tracking-tight text-ink">
             Choose Your{" "}
             <span className="font-serif italic font-normal text-clay">
               Pathway
             </span>
           </h2>
-          <p className="mt-4 max-w-prose text-xs sm:text-sm text-ink-soft leading-relaxed font-light">
+          <p className="mt-4 max-w-prose text-sm sm:text-base text-ink-soft leading-relaxed font-light">
             Select a category below. Hover over any session card to reveal
             details and focus your wellness selection.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 border border-stone">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-stone">
           {tabsConfig.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -98,7 +113,7 @@ export default function Sessions() {
                   setActiveTab(tab.id);
                   setHoveredId(null);
                 }}
-                className="relative flex flex-col items-center text-center py-6 px-4 cursor-pointer transition-all duration-300 overflow-hidden outline-none"
+                className="relative flex flex-col items-center text-center py-6 px-3 cursor-pointer transition-all duration-300 overflow-hidden outline-none border-b sm:border-b-0 sm:border-r border-stone last:border-r-0"
               >
                 {isActive && (
                   <motion.div
@@ -109,7 +124,7 @@ export default function Sessions() {
                 )}
 
                 <span
-                  className={`relative z-10 font-display text-lg font-medium transition-colors duration-300 ${
+                  className={`relative z-10 font-display text-base sm:text-lg font-medium transition-colors duration-300 ${
                     isActive ? "text-paper" : "text-ink hover:text-clay"
                   }`}
                 >
@@ -117,7 +132,7 @@ export default function Sessions() {
                 </span>
 
                 <span
-                  className={`relative z-10 text-[10px] font-mono mt-1 tracking-wider uppercase transition-colors duration-300 ${
+                  className={`relative z-10 text-[10px] sm:text-[11px] font-mono mt-1 tracking-wider uppercase transition-colors duration-300 ${
                     isActive ? "text-paper/70" : "text-ink-soft"
                   }`}
                 >
@@ -128,13 +143,13 @@ export default function Sessions() {
           })}
         </div>
 
-        <div className="mt-8 border-x border-b border-stone p-8 sm:p-10 bg-stone-light/15 relative text-center flex flex-col gap-2.5">
+        <div className="mt-8 border-x border-b border-stone p-8 sm:p-10 bg-stone-light/15 relative text-center flex flex-col gap-3">
           <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay/30" />
           <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-clay/30" />
-          <p className="font-hindi text-lg sm:text-xl text-clay font-normal tracking-wide">
+          <p className="font-hindi text-xl sm:text-2xl text-clay font-normal tracking-wide leading-relaxed">
             &ldquo;{activeTabConfig.sanskritQuote}&rdquo;
           </p>
-          <p className="font-sans text-xs italic text-ink-soft leading-relaxed max-w-3xl mx-auto font-light">
+          <p className="font-sans text-sm sm:text-base italic text-ink-soft leading-relaxed max-w-3xl mx-auto font-light">
             {activeTabConfig.englishQuote}
           </p>
         </div>
@@ -143,7 +158,7 @@ export default function Sessions() {
           <motion.div
             layout
             className={`grid grid-cols-1 gap-8 transition-all duration-300 ${
-              activeTab === "consultation"
+              activeSessions.length >= 4
                 ? "md:grid-cols-2 lg:grid-cols-4"
                 : "md:grid-cols-2 lg:grid-cols-3"
             }`}
@@ -173,14 +188,14 @@ export default function Sessions() {
         </div>
 
         <div className="mt-16 border-t border-stone pt-12 flex flex-col items-center gap-6">
-          <div className="border border-clay/60 p-6 bg-stone-light/35 text-center max-w-2xl mx-auto relative">
-            <span className="absolute top-0 left-0 bg-clay text-paper text-[8px] uppercase tracking-widest font-bold px-2.5 py-0.5">
+          <div className="border border-clay/60 p-6 sm:p-8 bg-stone-light/35 text-center max-w-2xl mx-auto relative">
+            <span className="absolute top-0 left-0 bg-clay text-paper text-[9px] uppercase tracking-widest font-bold px-3 py-1">
               Scheduling Note
             </span>
-            <p className="text-xs uppercase tracking-widest font-semibold text-ink mt-2">
+            <p className="text-sm uppercase tracking-widest font-semibold text-ink mt-2">
               Payment &amp; Coordination
             </p>
-            <p className="mt-2 text-xs leading-relaxed text-ink-soft font-light">
+            <p className="mt-2.5 text-sm sm:text-base leading-relaxed text-ink-soft font-light">
               Pricing details are listed directly within the registration forms.
               Once you submit the form and complete your payment, our team will
               reach out within{" "}

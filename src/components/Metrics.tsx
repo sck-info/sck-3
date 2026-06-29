@@ -14,14 +14,18 @@ export default function Metrics() {
 
       <Container>
         <div className="flex flex-col items-center text-center mb-16">
-          <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-clay bg-stone/40 px-3.5 py-1.5 border border-stone">
-            Our Metrics
+          <span className="text-[10px] font-mono tracking-[0.25em] font-bold text-moss uppercase bg-stone-light/60 px-4 py-1.5 border border-stone inline-flex items-center gap-2">
+            KARMA KUSHALA &bull; OUR METRICS
           </span>
           <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-ink sm:text-5xl">
-            Over a Decade of <span className="font-serif italic font-normal text-clay">Healing Impact</span>
+            More than a Decade of{" "}
+            <span className="font-serif italic font-normal text-clay">
+              Healing Impact
+            </span>
           </h2>
-          <p className="mt-4 max-w-prose text-xs sm:text-sm text-ink-soft leading-relaxed font-light">
-            A balanced overview of our progressive reach, corporate seminars, and dedicated therapeutic sessions.
+          <p className="mt-4 max-w-prose text-sm sm:text-base text-ink-soft leading-relaxed font-light">
+            A balanced overview of our progressive reach, corporate seminars,
+            and dedicated therapeutic sessions.
           </p>
         </div>
 
@@ -34,16 +38,16 @@ export default function Metrics() {
               <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 border-t border-l border-clay/0 group-hover:border-clay/45 transition-colors" />
               <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 border-b border-r border-clay/0 group-hover:border-clay/45 transition-colors" />
 
-              <p className="font-display text-3xl font-semibold tracking-tight text-ink">
+              <p className="font-display text-4xl font-semibold tracking-tight text-ink">
                 <CountUp value={metric.value} isDecimal={metric.isDecimal} />
-                <span className="font-serif italic font-light text-clay text-xl ml-0.5">
+                <span className="font-serif italic font-light text-clay text-2xl ml-0.5">
                   {metric.suffix}
                 </span>
               </p>
-              
+
               <div className="w-6 h-[1px] bg-stone group-hover:bg-clay/30 my-2.5 transition-colors" />
-              
-              <p className="text-[9px] uppercase tracking-wider font-semibold text-ink-soft font-poppins leading-normal max-w-[120px]">
+
+              <p className="text-[12px] uppercase tracking-wider font-semibold text-ink-soft font-mono leading-normal max-w-[130px]">
                 {metric.label}
               </p>
             </div>

@@ -6,6 +6,7 @@ import About from "@/components/About";
 import Sessions from "@/components/Sessions";
 import SomaticPathwayFinder from "@/components/SomaticPathwayFinder";
 import MindfulFocusTrainer from "@/components/MindfulFocusTrainer";
+import MomentsOfTransformation from "@/components/MomentsOfTransformation";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -35,21 +36,29 @@ export default function Home() {
           </ScrollReveal>
         )}
         
-        <ScrollReveal>
-          <MindfulFocusTrainer />
-        </ScrollReveal>
+        {false && (
+          <ScrollReveal>
+            <MindfulFocusTrainer />
+          </ScrollReveal>
+        )}
         
         <ScrollReveal>
           <Sessions />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <MomentsOfTransformation />
         </ScrollReveal>
         
         <ScrollReveal>
           <Testimonials />
         </ScrollReveal>
         
-        <ScrollReveal>
-          <Contact />
-        </ScrollReveal>
+        {false && (
+          <ScrollReveal>
+            <Contact />
+          </ScrollReveal>
+        )}
       </main>
       
       <Footer />

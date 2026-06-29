@@ -1,7 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Container from "@/components/ui/Container";
+import HangingLotus from "@/components/ui/HangingLotus";
 
 const testimonials = [
   {
@@ -37,31 +40,55 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      },
-    },
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
+
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [currentIndex, isHovered]);
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+    }),
+  };
+
+  const activeTestimonial = testimonials[currentIndex];
 
   return (
     <section
       id="testimonials"
       className="border-t border-stone py-24 sm:py-32 bg-aura relative overflow-hidden"
     >
+      <HangingLotus align="left" />
+      <HangingLotus align="right" />
+      
       <div className="absolute top-[20%] right-[-10%] w-96 h-96 text-stone/10 select-none pointer-events-none transform rotate-45">
         <svg viewBox="0 0 100 100" fill="currentColor">
           <path
@@ -73,11 +100,9 @@ export default function Testimonials() {
 
       <Container className="relative z-10">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-light/60 border border-stone rounded-none mb-4">
-            <span className="text-clay text-[10px]" aria-hidden="true">
-              &#10047;
-            </span>
-            <span className="text-[9px] font-mono tracking-[0.25em] font-bold text-moss">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-stone-light/60 border border-stone rounded-none mb-4">
+            <span className="text-clay text-xs select-none" aria-hidden="true">&#10047;</span>
+            <span className="text-[10px] font-mono tracking-[0.25em] font-bold text-moss uppercase">
               PREMA VRIKSHA &bull; WALL OF LOVE
             </span>
           </div>
@@ -87,59 +112,99 @@ export default function Testimonials() {
             <span className="font-serif italic font-normal text-clay">
               Healing
             </span>{" "}
-            & Transformation
+            &amp; Transformation
           </h2>
-          <p className="mt-4 text-xs sm:text-sm text-ink-soft leading-relaxed font-light">
+          <p className="mt-4 text-sm sm:text-base text-ink-soft leading-relaxed font-light">
             Honest reflections from individuals who have rediscovered balance,
             somatic release, and clarity through our customized paths of
             wellness.
           </p>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        <div
+          className="mt-16 max-w-4xl mx-auto relative px-4 sm:px-12"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          {testimonials.map((t, idx) => (
-            <motion.div
-              key={t.name}
-              variants={itemVariants}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className={`p-8 border border-stone bg-paper relative flex flex-col justify-between group shadow-sm transition-all duration-300 hover:border-clay/40 ${
-                idx === 0
-                  ? "md:col-span-2 lg:col-span-2"
-                  : "md:col-span-1 lg:col-span-1"
-              }`}
-            >
-              <div className="absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-stone group-hover:border-clay/30 transition-colors" />
-              <div className="absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-stone group-hover:border-clay/30 transition-colors" />
+          <div className="min-h-[320px] sm:min-h-[280px] flex items-center justify-center relative overflow-hidden">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.3 },
+                }}
+                className="w-full border border-stone bg-paper p-8 sm:p-12 relative shadow-md flex flex-col justify-between"
+              >
+                <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-clay/40" />
+                <div className="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-clay/40" />
 
-              <div>
-                <span className="text-clay text-lg select-none font-serif leading-none block mb-4">
-                  &ldquo;
+                <span className="text-clay text-3xl select-none block mb-4" aria-hidden="true">
+                  &#10047;
                 </span>
-                <p className="text-xs sm:text-[13px] leading-relaxed text-ink-soft font-serif italic">
-                  {t.text}
+
+                <p className="text-base sm:text-xl leading-relaxed text-ink font-serif italic max-w-3xl">
+                  &ldquo;{activeTestimonial.text}&rdquo;
                 </p>
-              </div>
 
-              <div className="mt-8 pt-6 border-t border-stone-light/60 flex flex-col gap-1">
-                <span className="text-xs uppercase font-mono tracking-widest text-clay/80">
-                  {t.therapy}
-                </span>
-                <h4 className="text-[14px] font-semibold text-ink font-sans">
-                  {t.name}
-                </h4>
-                <span className="text-[10px] text-ink-soft/80 font-light">
-                  {t.role}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                <div className="mt-8 pt-6 border-t border-stone/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-ink font-sans">
+                      {activeTestimonial.name}
+                    </h3>
+                    <p className="text-xs text-ink-soft font-light">
+                      {activeTestimonial.role}
+                    </p>
+                  </div>
+
+                  <span className="text-xs font-mono uppercase tracking-widest text-clay font-semibold bg-stone-light/80 px-3.5 py-1.5 border border-stone">
+                    {activeTestimonial.therapy}
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="flex items-center justify-between mt-8">
+            <div className="flex items-center gap-2">
+              {testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setDirection(idx > currentIndex ? 1 : -1);
+                    setCurrentIndex(idx);
+                  }}
+                  className={`h-2.5 transition-all duration-300 rounded-full ${
+                    idx === currentIndex ? "w-8 bg-clay" : "w-2.5 bg-stone hover:bg-stone-dark"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={prevSlide}
+                className="p-3 border border-stone bg-paper text-ink hover:border-clay hover:text-clay transition-all duration-200 shadow-sm"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="p-3 border border-stone bg-paper text-ink hover:border-clay hover:text-clay transition-all duration-200 shadow-sm"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        </div>
       </Container>
     </section>
   );

@@ -23,7 +23,9 @@ export default function SessionCard({
   const panelId = `${session.id}-additional-info`;
 
   const isTherapy = session.category === "therapy";
-  const isClassOrWorkshop = session.category === "class" || session.category === "workshop";
+  const isConsultation = session.category === "consultation";
+  const isClass = session.category === "class";
+  const isWorkshop = session.category === "workshop";
 
   let hoverBorderClass = "border-clay";
   let hoverDecorClass = "border-clay";
@@ -31,9 +33,15 @@ export default function SessionCard({
   if (isTherapy) {
     hoverBorderClass = "border-moss";
     hoverDecorClass = "border-moss";
-  } else if (isClassOrWorkshop) {
-    hoverBorderClass = "border-blue-600";
-    hoverDecorClass = "border-[#2563eb]";
+  } else if (isConsultation) {
+    hoverBorderClass = "border-clay";
+    hoverDecorClass = "border-clay";
+  } else if (isClass) {
+    hoverBorderClass = "border-[#4A6FA5]";
+    hoverDecorClass = "border-[#4A6FA5]";
+  } else if (isWorkshop) {
+    hoverBorderClass = "border-[#C9873A]";
+    hoverDecorClass = "border-[#C9873A]";
   }
 
   return (
@@ -61,33 +69,33 @@ export default function SessionCard({
       <div>
         <div className="flex flex-wrap gap-1.5">
           {session.duration && (
-            <span className="text-[9px] uppercase tracking-wider font-bold bg-stone text-ink px-2.5 py-0.5 rounded-full">
+            <span className="text-[10px] uppercase tracking-wider font-bold bg-stone text-ink px-2.5 py-0.5 rounded-full">
               {session.duration}
             </span>
           )}
           {session.mode && (
-            <span className="text-[9px] uppercase tracking-wider font-bold border border-clay/40 text-clay px-2.5 py-0.5 rounded-full">
+            <span className="text-[10px] uppercase tracking-wider font-bold border border-clay/40 text-clay px-2.5 py-0.5 rounded-full">
               {session.mode}
             </span>
           )}
           {session.format && (
-            <span className="text-[9px] uppercase tracking-wider font-bold text-ink-soft bg-paper border border-stone px-2.5 py-0.5 rounded-full">
+            <span className="text-[10px] uppercase tracking-wider font-bold text-ink-soft bg-paper border border-stone px-2.5 py-0.5 rounded-full">
               {session.format}
             </span>
           )}
         </div>
 
-        <h3 className="mt-4 font-display text-xl font-medium tracking-tight text-ink transition-colors duration-300 group-hover:text-clay">
+        <h3 className="mt-4 font-display text-xl sm:text-2xl font-medium tracking-tight text-ink transition-colors duration-300 group-hover:text-clay">
           {session.name}
         </h3>
 
         {session.subDetails && (
-          <p className="mt-1 text-[11px] font-mono tracking-tight text-clay/80 uppercase font-semibold">
+          <p className="mt-1.5 text-[11px] font-mono tracking-tight text-clay/90 uppercase font-semibold">
             {session.subDetails}
           </p>
         )}
 
-        <p className="mt-3 text-xs leading-relaxed text-ink-soft font-light">
+        <p className="mt-3 text-sm leading-relaxed text-ink-soft font-light">
           {session.description}
         </p>
 
@@ -98,11 +106,11 @@ export default function SessionCard({
               onClick={() => setExpanded((open) => !open)}
               aria-expanded={expanded}
               aria-controls={panelId}
-              className="flex items-center gap-1 text-[10px] uppercase tracking-wider font-bold text-ink hover:text-clay transition-colors cursor-pointer"
+              className="flex items-center gap-1 text-[11px] uppercase tracking-wider font-bold text-ink hover:text-clay transition-colors cursor-pointer"
             >
               {expanded ? "Less Details" : "More Details"}
               <ChevronDown
-                className={`h-3 w-3 transition-transform duration-300 ${
+                className={`h-3.5 w-3.5 transition-transform duration-300 ${
                   expanded ? "rotate-180 text-clay" : ""
                 }`}
                 aria-hidden="true"
@@ -118,7 +126,7 @@ export default function SessionCard({
               }`}
             >
               <div className="min-h-0">
-                <p className="border-l-2 border-clay pl-3 text-xs leading-relaxed text-ink-soft font-light italic">
+                <p className="border-l-2 border-clay pl-3 text-sm leading-relaxed text-ink-soft font-light italic">
                   {session.additionalInfo}
                 </p>
               </div>

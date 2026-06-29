@@ -24,40 +24,40 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-6">
-            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-clay bg-stone/40 px-3.5 py-1.5 border border-stone">
-              Connect With Us
+            <span className="text-[10px] font-mono tracking-[0.25em] font-bold text-moss uppercase bg-stone-light/60 px-4 py-1.5 border border-stone inline-flex items-center gap-2">
+              SAMVADA &bull; CONNECT WITH US
             </span>
             <h2 className="mt-6 font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
               Questions before you <span className="font-serif italic font-normal text-clay">register</span>?
             </h2>
-            <p className="mt-4 max-w-prose text-xs sm:text-sm leading-relaxed text-ink-soft font-light">
+            <p className="mt-4 max-w-prose text-sm sm:text-base leading-relaxed text-ink-soft font-light">
               Reach out directly and I&apos;ll help you understand which therapy, planetary chart reading, or holistic coaching workshop align best with your path.
             </p>
           </div>
 
-          <div className="lg:col-span-6 border border-clay/50 p-8 bg-stone-light/30 flex flex-col gap-6 relative">
+          <div className="lg:col-span-6 border border-clay/50 p-8 sm:p-10 bg-stone-light/30 flex flex-col gap-6 relative">
             <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-clay" />
             <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-clay" />
             
-            <h3 className="font-display text-xl font-medium text-ink">
+            <h3 className="font-display text-2xl font-medium text-ink">
               Get in <span className="font-serif italic font-normal text-clay">Touch</span>
             </h3>
             
             <ul className="flex flex-col gap-5">
               {contactItems.map(({ icon: Icon, label, href }) => (
-                <li key={label} className="flex items-center gap-3.5 border-b border-stone/50 pb-3 last:border-b-0 last:pb-0">
-                  <div className="p-2 border border-stone bg-paper text-clay shrink-0">
+                <li key={label} className="flex items-center gap-3.5 border-b border-stone/50 pb-3.5 last:border-b-0 last:pb-0">
+                  <div className="p-2.5 border border-stone bg-paper text-clay shrink-0">
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </div>
                   {href ? (
                     <a
                       href={href}
-                      className="text-xs font-poppins tracking-tight text-ink hover:text-clay hover:underline transition-all font-light"
+                      className="text-sm sm:text-base font-sans tracking-tight text-ink hover:text-clay hover:underline transition-all font-light"
                     >
                       {label}
                     </a>
                   ) : (
-                    <span className="text-xs font-poppins tracking-tight text-ink-soft font-light">{label}</span>
+                    <span className="text-sm sm:text-base font-sans tracking-tight text-ink-soft font-light">{label}</span>
                   )}
                 </li>
               ))}

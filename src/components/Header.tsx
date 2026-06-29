@@ -1,13 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Container from "@/components/ui/Container";
 
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Sessions", href: "#sessions" },
   { label: "Contact", href: "#contact" },
+];
+
+const sessionCategories = [
+  { id: "therapy", label: "Therapy Sessions" },
+  { id: "consultation", label: "1-on-1 Consultations" },
+  { id: "class", label: "Music Classes" },
+  { id: "workshop", label: "Workshops" },
 ];
 
 const palettes = {
@@ -31,16 +38,16 @@ const palettes = {
     name: "Royal Indigo",
     previewColor: "#1C1F4A",
     colors: {
-      "--color-paper": "#FAF7F2",
-      "--color-ink": "#1C1F4A",
-      "--color-ink-soft": "#5A5E7A",
-      "--color-clay": "#B86A16",
-      "--color-moss": "#6B8F71",
-      "--color-moss-dark": "#4E6B52",
-      "--color-stone": "#EAE3D5",
-      "--color-stone-light": "#F4EDE2",
-      "--color-gold": "#E8962E",
-      "--color-border-active": "#B86A16",
+      "--color-paper": "#F0F3FA",
+      "--color-ink": "#13163A",
+      "--color-ink-soft": "#3E4473",
+      "--color-clay": "#D97706",
+      "--color-moss": "#2563EB",
+      "--color-moss-dark": "#1D4ED8",
+      "--color-stone": "#CBD5E1",
+      "--color-stone-light": "#E2E8F0",
+      "--color-gold": "#F59E0B",
+      "--color-border-active": "#13163A",
     }
   },
   "forest-zen": {
@@ -86,6 +93,14 @@ export default function Header() {
     localStorage.setItem("selected-palette", key);
   };
 
+  const handleSelectCategory = (tabId: string) => {
+    window.dispatchEvent(new CustomEvent("select-session-tab", { detail: { tab: tabId } }));
+    const sessionsElem = document.getElementById("sessions");
+    if (sessionsElem) {
+      sessionsElem.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-stone bg-paper/80 backdrop-blur-md transition-all duration-300">
       <Container className="flex items-center justify-between py-5">
@@ -97,16 +112,46 @@ export default function Header() {
         </a>
 
         <div className="flex items-center gap-6">
-          <nav className="hidden gap-8 sm:flex" aria-label="Primary">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-xs uppercase tracking-widest font-medium text-ink-soft hover:text-ink transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-ink hover:after:w-full after:transition-all after:duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
+          <nav className="hidden items-center gap-8 sm:flex" aria-label="Primary">
+            {navLinks.map((link) => {
+              if (link.label === "Sessions") {
+                return (
+                  <div key={link.href} className="relative group inline-flex items-center">
+                    <a
+                      href={link.href}
+                      className="text-xs uppercase tracking-widest font-medium text-ink-soft hover:text-ink transition-colors inline-flex items-center gap-1 leading-none"
+                    >
+                      <span>{link.label}</span>
+                      <ChevronDown className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180 text-clay" />
+                    </a>
+
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-50 min-w-[200px]">
+                      <div className="bg-paper border border-stone shadow-xl p-2 flex flex-col gap-1">
+                        {sessionCategories.map((cat) => (
+                          <button
+                            key={cat.id}
+                            type="button"
+                            onClick={() => handleSelectCategory(cat.id)}
+                            className="px-3 py-2 text-[11px] font-mono tracking-wider text-ink-soft hover:bg-stone-light hover:text-ink text-left transition-colors cursor-pointer"
+                          >
+                            {cat.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-xs uppercase tracking-widest font-medium text-ink-soft hover:text-ink transition-colors inline-flex items-center leading-none"
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
 
           <div className="hidden sm:flex items-center gap-2 border-l border-stone pl-6 py-1">
@@ -116,7 +161,7 @@ export default function Header() {
                 <button
                   key={key}
                   onClick={() => changePalette(key as any)}
-                  className="w-4 h-4 rounded-full border transition-all duration-300 relative group"
+                  className="w-4 h-4 rounded-full border transition-all duration-300 relative group cursor-pointer"
                   style={{ 
                     backgroundColor: palette.previewColor,
                     borderColor: activePalette === key ? "var(--color-clay)" : "rgba(0, 0, 0, 0.15)"
@@ -158,16 +203,46 @@ export default function Header() {
         >
           <Container className="flex flex-col gap-4 py-4">
             <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-md px-3 py-3 text-sm uppercase tracking-wider font-medium text-ink-soft hover:bg-stone-light hover:text-ink transition-all"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                if (link.label === "Sessions") {
+                  return (
+                    <div key={link.href} className="flex flex-col gap-1">
+                      <a
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="rounded-md px-3 py-2.5 text-sm uppercase tracking-wider font-medium text-ink-soft hover:bg-stone-light hover:text-ink transition-all flex items-center justify-between"
+                      >
+                        <span>{link.label}</span>
+                      </a>
+                      <div className="pl-4 flex flex-col gap-1 border-l-2 border-stone/60 ml-3 mb-2">
+                        {sessionCategories.map((cat) => (
+                          <button
+                            key={cat.id}
+                            type="button"
+                            onClick={() => {
+                              setMenuOpen(false);
+                              handleSelectCategory(cat.id);
+                            }}
+                            className="px-3 py-2 text-xs font-mono text-ink-soft hover:text-clay text-left transition-colors cursor-pointer"
+                          >
+                            {cat.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-md px-3 py-3 text-sm uppercase tracking-wider font-medium text-ink-soft hover:bg-stone-light hover:text-ink transition-all"
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
             </div>
 
             <div className="border-t border-stone pt-4 px-3 flex items-center justify-between">

@@ -175,35 +175,30 @@ export default function Hero() {
             className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left gap-8 w-full"
           >
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-light/60 border border-stone rounded-none mb-4">
-                <span className="text-clay text-[10px]" aria-hidden="true">&#10047;</span>
-                <span className="text-[9px] font-mono tracking-[0.25em] font-bold text-moss">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-stone-light/60 border border-stone rounded-none mb-4">
+                <span className="text-clay text-xs select-none" aria-hidden="true">&#10047;</span>
+                <span className="text-[10px] font-mono tracking-[0.25em] font-bold text-moss uppercase">
                   WELCOME &bull; SWAAGATAM
                 </span>
               </div>
               
               <h1 className="font-display text-4xl sm:text-6xl font-light tracking-tight leading-[1.08] text-ink">
-                Cultivate Serenity. <br />
-                <span className="font-serif italic font-normal text-clay">Reclaim Stillness.</span>
+                Inspire. <br />
+                <span className="font-serif italic font-normal text-clay">Heal. Uplift.</span>
               </h1>
               
-              <p className="mt-4 font-serif italic text-xs tracking-wider text-ink-soft bg-stone-light/40 border-l border-clay/60 pl-4 py-1 max-w-xl mx-auto lg:mx-0">
-                <span className="font-hindi not-italic font-normal block mb-1 text-[13.5px]">&ldquo;असतो मा सद्गमय &bull; तमसो मा ज्योतिर्गमय &bull; मृत्योर्मा अमृतं गमय&rdquo;</span>
-                <span className="text-[11.5px] font-sans tracking-wide text-ink-soft/80 block mt-1 not-italic">
+              <p className="mt-4 font-serif italic text-sm tracking-wider text-ink-soft bg-stone-light/40 border-l border-clay/60 pl-4 py-1.5 max-w-xl mx-auto lg:mx-0">
+                <span className="font-hindi not-italic font-normal block mb-1 text-base sm:text-lg">&ldquo;असतो मा सद्गमय &bull; तमसो मा ज्योतिर्गमय &bull; मृत्योर्मा अमृतं गमय&rdquo;</span>
+                <span className="text-xs sm:text-sm font-sans tracking-wide text-ink-soft/80 block mt-1 not-italic">
                   Lead me from ignorance to truth, from darkness to light, from death to immortality.
                 </span>
               </p>
             </div>
 
             <div className="max-w-xl w-full">
-              <p className="text-sm leading-relaxed text-ink-soft font-light">
-                I integrate restorative bio-dynamic CranioSacral touch, rhythmic foot pressure, vocal harmonics, and chart guidance to realign the body. This is a dedicated sanctuary crafted for your body to recall its innate pattern of rest.
+              <p className="text-base sm:text-lg leading-relaxed text-ink-soft font-light">
+                Sharath Chandra Kancherla is a Life Skills Facilitator, Mind &amp; Breath Expert, Holistic Wellness Coach &amp; Professional Singer. Inspiring 1.5 lakh+ lives across 10+ countries.
               </p>
-              <div className="text-center lg:text-right mt-4 w-full">
-                <span className="font-hindi font-bold text-clay text-lg sm:text-xl block">
-                  — Sharath Chandra Kancherla
-                </span>
-              </div>
             </div>
 
              <div className="w-full max-w-xl border border-stone bg-paper p-5.5 rounded-none shadow-sm relative overflow-hidden mx-auto lg:mx-0">
@@ -227,7 +222,7 @@ export default function Hero() {
                         : "bg-stone-light border-stone"
                     }`}
                   >
-                    <span className="text-xs font-mono font-bold text-ink">{breathCount}s</span>
+                    <span className="text-sm font-mono font-bold text-ink">{breathCount}s</span>
                   </motion.div>
                   
                   <span className={`absolute inset-0 rounded-full animate-ping opacity-25 ${
@@ -242,7 +237,7 @@ export default function Hero() {
                 </div>
 
                 <div>
-                  <h4 className="text-[10px] font-mono uppercase tracking-[0.2em] text-clay font-bold">
+                  <h4 className="text-xs font-mono uppercase tracking-[0.2em] text-clay font-bold">
                     Pranayama Breathing Guide
                   </h4>
                   <AnimatePresence mode="wait">
@@ -252,7 +247,7 @@ export default function Hero() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -3 }}
                       transition={{ duration: 0.2 }}
-                      className="text-sm font-serif italic text-ink font-semibold mt-1"
+                      className="text-base font-serif italic text-ink font-semibold mt-1"
                     >
                       {breathState === "Inhale" && "Breath In: Draw in quiet energy..."}
                       {breathState === "Hold" && "Hold: Suspend and feel the peace..."}
@@ -260,7 +255,7 @@ export default function Hero() {
                       {breathState === "HoldAgain" && "Hold Again: Rest in the empty space..."}
                     </motion.p>
                   </AnimatePresence>
-                  <p className="text-[10.5px] leading-normal text-ink-soft/90 font-light mt-1">
+                  <p className="text-xs sm:text-sm leading-normal text-ink-soft/90 font-light mt-1">
                     Take a moment to align with this pattern before exploring my offerings.
                   </p>
                 </div>
